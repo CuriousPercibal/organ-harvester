@@ -47,19 +47,16 @@ export function drawGrid(context) {
 }
 
 export function drawBuildingInCell(context, cell, buildingNumber) {
-    console.log(buildings)
-    console.log(buildingNumber)
     const building = buildings[buildingNumber]
-    console.log(building)
-    const yOffset = 64*3 + 10
-    context.drawImage(building, cell.x*64, cell.y*64 + yOffset)
+    drawImage(context, cell, building)
 }
 
 export function drawItemInCell(context, cell, buildingNumber) {
-    console.log(items)
-    console.log(buildingNumber)
     const item = items[buildingNumber]
-    console.log(item)
+    drawImage(context, cell, item)
+}
+
+function drawImage(context, cell, item) {
     const yOffset = 64*3 + 10
     context.drawImage(item, cell.x*64, cell.y*64 + yOffset)
 }

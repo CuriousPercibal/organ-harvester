@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    overflow: hidden;
+    overflow: scroll;
+    background: rgb(2,8,41);
 }
 
 #game {

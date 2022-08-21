@@ -13,7 +13,6 @@ function initPool() {
         clone.index = i
         POOL[i] = clone
     }
-    console.log(POOL)
 }
 
 export function spawnEntity(entityId, spawnPosition) {
@@ -32,6 +31,7 @@ export function moveEntity(index, direction) {
     const entity = POOL.find((value, index1) => index1 === index)
     if (!entity) {
         console.log(`Entity with index ${index} not found`)
+        return
     }
     const pos = entity.position
     pos.x += direction.x
