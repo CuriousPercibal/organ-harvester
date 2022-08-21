@@ -1,7 +1,12 @@
-export const tiles = [
+export const tileSet = [
   {
     "id": 0,
+    "name": "morgue",
+    "src": "assets/buildings/morgue.svg"
+  },
+  {
+    "id": 1,
     "name": "belt",
-    "src": "assets/belt.svg"
+    "src": "assets/buildings/belt.svg"
   }
 ]

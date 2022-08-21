@@ -1,4 +1,5 @@
-import {tiles} from '../data/tiles.mjs'
+import {buildings, items} from './loader.mjs'
+import {itemSet} from "../data/items.mjs";
 
 export function drawBasePattern(context) {
     const canvas = context.canvas
@@ -21,11 +22,8 @@ export function drawBasePattern(context) {
         context.fillStyle = '#2f2f2f'
         context.fillRect(x, y, 4, height)
     }
-    const image = new Image()
-    image.src = 'assets/morgue.svg'
-    image.onload = () => {
-        context.drawImage(image, 12*64, 0)
-    }
+    context.fillStyle = '#131414'
+    context.fillRect(17*64, y, 64, 12)
 }
 
 export function drawGrid(context) {
@@ -48,13 +46,20 @@ export function drawGrid(context) {
     context.stroke();
 }
 
+export function drawBuildingInCell(context, cell, buildingNumber) {
+    console.log(buildings)
+    console.log(buildingNumber)
+    const building = buildings[buildingNumber]
+    console.log(building)
+    const yOffset = 64*3 + 10
+    context.drawImage(building, cell.x*64, cell.y*64 + yOffset)
+}
+
 export function drawItemInCell(context, cell, buildingNumber) {
-    const building = tiles.filter(value => value.id === buildingNumber)[0]
-    const canvas = context.canvas
-    const yOffset =  64*3 + 10
-    const image = new Image()
-    image.src = building.src
-    image.onload = () => {
-        context.drawImage(image, cell.x*64, cell.y*64 + yOffset)
-    }
+    console.log(items)
+    console.log(buildingNumber)
+    const item = items[buildingNumber]
+    console.log(item)
+    const yOffset = 64*3 + 10
+    context.drawImage(item, cell.x*64, cell.y*64 + yOffset)
 }
