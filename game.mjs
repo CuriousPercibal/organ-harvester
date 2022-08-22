@@ -6,7 +6,7 @@ import {isEntityCollidingWithBelt, moveEntityOnBelt} from "./buildings/belt.mjs"
 import {drawBackground} from "./modules/background.mjs";
 
 const game = {}
-const FPS = 60
+const FPS = 20
 let start = Date.now()
 let frameDuration = 1000 / FPS
 let lag = 0;
@@ -79,10 +79,11 @@ function getUtilityFunctions(building) {
 function update() {
     POOL.filter(value => value.active)
         .filter(value => {
-            const x = Math.floor(value.position.x)
-            const y = Math.floor(value.position.y)
+            const x = Math.floor(value.position.x + 0.5)
+            const y = Math.floor(value.position.y + 0.5)
             const building = game.cells[y][x]
-            return !!building.collider && building.collider(building, value)
+            const collider = building.collider
+            return !!collider && collider(building, value)
         })
         .forEach(value => {
             const x = Math.floor(value.position.x)

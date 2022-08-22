@@ -1,71 +1,55 @@
 import {moveEntity} from "../entities/entity.mjs";
 import {nameToDirection, EAST, WEST, NORTH, SOUTH} from "../data/directions.js";
 
-const facingSouth = {
-    nq: SOUTH,
-    eq: WEST,
-    wq: EAST,
-    sq: SOUTH
-}
-
-const facingNorth = {
-    nq: NORTH,
-    eq: WEST,
-    wq: EAST,
-    sq: NORTH
-}
-
-const facingEast = {
-    nq: SOUTH,
-    eq: EAST,
-    wq: EAST,
-    sq: NORTH
-}
-
-const facingWest = {
-    nq: SOUTH,
-    eq: WEST,
-    wq: WEST,
-    sq: NORTH
-}
-
 export function moveEntityOnBelt(belt, entity) {
-    console.log(belt)
+    console.log({belt, entity})
     const direction = determineDirection(belt, entity)
     console.log(direction)
     moveEntity(entity.index, direction)
 }
 
 function determineDirection(belt, entity) {
-    const x = entity.position.x - belt.position.x
-    const y = entity.position.y - belt.position.y
-    const direction = nameToDirection(belt.state)
-    if ((Math.abs(x) < 0.15 && Math.abs(y) < 0.15) || (Math.round(x) === direction.x && Math.round(y) === direction.y)) {
-        console.log({direction})
-        return direction
+    const [x, y] = getCenterDirection(belt, entity)
+    const facing = belt.state.toUpperCase()
+    console.log(facing)
+    const [first, second, direction] = getDirectionsForFacing(facing)
+    console.log({x, y})
+    console.log({first, second, direction})
+    if ( facing === "NORTH" || facing === "SOUTH" ) {
+        if (x < 0.45) return first
+        if (x > 0.55) return second
     }
-    console.log('Center', {x, y})
-    return {x, y}
+    if ( facing === "EAST" || facing === "WEST" ) {
+        if (y < 0.45) return first
+        if (y > 0.55) return second
+    }
+    return direction
 }
 
-function getFacing(belt) {
-    switch (belt.state) {
+function getDirectionsForFacing(facing) {
+    switch (facing) {
         case 'NORTH':
-            return facingNorth;
+            return [EAST, WEST, NORTH];
         case 'SOUTH':
-            return facingSouth;
+            return [EAST, WEST, SOUTH];
         case 'EAST':
-            return facingEast;
+            return [SOUTH, NORTH, EAST];
         case 'WEST':
-            return facingWest;
+            return [SOUTH, NORTH, WEST];
     }
+}
+
+function getCenterDirection(belt, entity) {
+    const x = Math.round((entity.position.x + 0.5 + Number.EPSILON) * 100) / 100
+    const y = Math.round((entity.position.y + 0.5 + Number.EPSILON) * 100) / 100
+    const bx = belt.position.x
+    const by = belt.position.y
+    const cx = Math.abs(x -bx)
+    const cy = Math.abs(y -by)
+    return [cx, cy]
 }
 
 export function isEntityCollidingWithBelt(belt, entity) {
-    const x = Math.round(entity.position.x)
-    const y = Math.round(entity.position.y)
-    const bx = belt.position.x
-    const by = belt.position.y
-    console.log("Colliding: ", x >= bx && y >= by && x <= (bx + 1) && y <= (by + 1), entity)
-    return x >= bx && y >= by && x <= (bx + 1) && y <= (by + 1)
+    const [x, y] = getCenterDirection(belt, entity)
+    return x <=1 && y <=1 && x >= 0 && y >= 0
 }

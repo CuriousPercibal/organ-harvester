@@ -31,8 +31,8 @@ export function moveEntity(index, direction) {
         return
     }
     const pos = entity.position
-    pos.x += direction.x * SPEED
-    pos.y += direction.y * SPEED
+    pos.x += (direction.x * SPEED)
+    pos.y += (direction.y * SPEED)
     entity.position = pos
 }
 
