@@ -1,6 +1,6 @@
 export const SPEED = 0.05
 
-export const POOL_SIZE = 100
+export const POOL_SIZE = 1000
 export const POOL = Array(POOL_SIZE)
 const entityBlueprint = {index: 0, id: -1, active: false, position: {x: 0, y: 0}, state: ""}
 

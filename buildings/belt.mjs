@@ -1,20 +1,15 @@
 import {moveEntity} from "../entities/entity.mjs";
-import {nameToDirection, EAST, WEST, NORTH, SOUTH} from "../data/directions.js";
+import {EAST, NORTH, SOUTH, WEST} from "../data/directions.js";
 
 export function moveEntityOnBelt(belt, entity) {
-    console.log({belt, entity})
     const direction = determineDirection(belt, entity)
-    console.log(direction)
     moveEntity(entity.index, direction)
 }
 
 function determineDirection(belt, entity) {
     const [x, y] = getCenterDirection(belt, entity)
     const facing = belt.state.toUpperCase()
-    console.log(facing)
     const [first, second, direction] = getDirectionsForFacing(facing)
-    console.log({x, y})
-    console.log({first, second, direction})
     if ( facing === "NORTH" || facing === "SOUTH" ) {
         if (x < 0.45) return first
         if (x > 0.55) return second

@@ -1,12 +1,11 @@
 import {drawBasePattern, drawBuildingInCell, drawGrid, drawItemInCell} from "./modules/base.mjs";
-import {buildings, items, loadAssets} from "./modules/loader.mjs";
-import {POOL, spawnEntity, moveEntity} from "./entities/entity.mjs";
-import {SOUTH} from "./data/directions.js";
+import {buildings, loadAssets} from "./modules/loader.mjs";
+import {POOL, spawnEntity} from "./entities/entity.mjs";
 import {isEntityCollidingWithBelt, moveEntityOnBelt} from "./buildings/belt.mjs";
 import {drawBackground} from "./modules/background.mjs";
 
 const game = {}
-const FPS = 20
+const FPS = 30
 let start = Date.now()
 let frameDuration = 1000 / FPS
 let lag = 0;
@@ -20,7 +19,7 @@ export async function init() {
     for (let i = 0; i < game.cells.length; i++) {
         game.cells[i] = Array(30)
         for (let j = 0; j < game.cells[i].length; j++) {
-            game.cells[i][j] = { id: -1, position: {x: j, y: i}}
+            game.cells[i][j] = {id: -1, position: {x: j, y: i}}
         }
     }
     await loadAssets()
@@ -72,11 +71,16 @@ function getUtilityFunctions(building) {
         case 'belt':
             return [isEntityCollidingWithBelt, moveEntityOnBelt]
         default:
-            return [(a, b) => {}, (a, b) => {}]
+            return [(a, b) => {
+            }, (a, b) => {
+            }]
     }
 }
 
 function update() {
+    const usage = POOL.filter(value => value.active).length / 10
+    console.log(`Pool usage: ${usage}%`)
+
     POOL.filter(value => value.active)
         .filter(value => {
             const x = Math.floor(value.position.x + 0.5)
@@ -88,7 +92,6 @@ function update() {
         .forEach(value => {
             const x = Math.floor(value.position.x)
             const y = Math.floor(value.position.y)
-            console.log({x, y})
             const building = game.cells[y][x]
             const move = building.move
             move(building, value)
