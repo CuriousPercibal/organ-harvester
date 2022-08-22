@@ -1,5 +1,6 @@
 import {buildings, items} from './loader.mjs'
-import {itemSet} from "../data/items.mjs";
+
+const offset = 64*3 + 10
 
 export function drawBasePattern(context) {
     const canvas = context.canvas
@@ -31,9 +32,9 @@ export function drawGrid(context) {
     const cellWidth = 64
     const cellHeight = 64
     let x = 0;
-    let y = 64*3 + 10
+    let y = offset
     context.beginPath()
-    for(x = 0; x < canvas.width; x += cellWidth) {
+    for(; x < canvas.width; x += cellWidth) {
         context.moveTo(x, y)
         context.lineTo(x, canvas.height)
     }
@@ -47,16 +48,15 @@ export function drawGrid(context) {
 }
 
 export function drawBuildingInCell(context, cell, buildingNumber) {
-    const building = buildings[buildingNumber]
+    const building = buildings[buildingNumber].img
     drawImage(context, cell, building)
 }
 
 export function drawItemInCell(context, cell, buildingNumber) {
-    const item = items[buildingNumber]
+    const item = items[buildingNumber].img
     drawImage(context, cell, item)
 }
 
 function drawImage(context, cell, item) {
-    const yOffset = 64*3 + 10
-    context.drawImage(item, cell.x*64, cell.y*64 + yOffset)
+    context.drawImage(item, cell.x*64, cell.y*64 + offset)
 }

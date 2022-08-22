@@ -6,10 +6,12 @@ export const items = {}
 
 export async function loadAssets() {
     for (const tile of tileSet) {
-        buildings[tile.id] = await loadImage(tile.src)
+        tile.img = await loadImage(tile.src)
+        buildings[tile.id] = tile
     }
     for (const item of itemSet) {
-        items[item.id] = await loadImage(item.src)
+        item.img = await loadImage(item.src)
+        items[item.id] = item
     }
 }
 

@@ -1,8 +1,5 @@
 export const SPEED = 0.05
-export const NORTH = Object.seal({x: 0, y: -SPEED})
-export const SOUTH = Object.seal({x: 0, y: SPEED})
-export const EAST = Object.seal({x: SPEED, y: 0})
-export const WEST = Object.seal({x: -SPEED, y: 0})
+
 export const POOL_SIZE = 100
 export const POOL = Array(POOL_SIZE)
 const entityBlueprint = {index: 0, id: -1, active: false, position: {x: 0, y: 0}, state: ""}
@@ -34,8 +31,8 @@ export function moveEntity(index, direction) {
         return
     }
     const pos = entity.position
-    pos.x += direction.x
-    pos.y += direction.y
+    pos.x += direction.x * SPEED
+    pos.y += direction.y * SPEED
     entity.position = pos
 }
 
