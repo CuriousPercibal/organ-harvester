@@ -1,11 +1,10 @@
-import {tileSet} from '../data/tiles.mjs'
+import {buildings} from '../data/buildings.mjs'
 import {itemSet} from '../data/items.mjs'
 
-export const buildings = {}
 export const items = {}
 
 export async function loadAssets() {
-    for (const tile of tileSet) {
+    for (const tile of buildings) {
         tile.img = await loadImage(tile.src)
         buildings[tile.id] = tile
     }

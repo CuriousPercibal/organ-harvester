@@ -1,4 +1,5 @@
-import {buildings, items} from './loader.mjs'
+import {items} from './loader.mjs'
+import {buildings} from "../data/buildings.mjs";
 
 const offset = 64*3 + 10
 

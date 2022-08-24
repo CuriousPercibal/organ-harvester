@@ -1,8 +1,10 @@
 import {drawBasePattern, drawBuildingInCell, drawGrid, drawItemInCell} from "./modules/base.mjs";
-import {buildings, loadAssets} from "./modules/loader.mjs";
+import {loadAssets} from "./modules/loader.mjs";
 import {POOL, spawnEntity} from "./entities/entity.mjs";
 import {isEntityCollidingWithBelt, moveEntityOnBelt} from "./buildings/belt.mjs";
 import {drawBackground} from "./modules/background.mjs";
+import {buildings, BUILDINGS} from "./data/buildings.mjs";
+import {listBuildings, onBuildButtonClick} from "./ui/build.mjs";
 
 const game = {}
 const FPS = 30
@@ -23,8 +25,13 @@ export async function init() {
         }
     }
     await loadAssets()
+    const buildButton = document.getElementById('build-button')
+    buildButton.onclick =  onBuildButtonClick
+    const closeBuildUi = document.getElementById('close-building-ui')
+    closeBuildUi.onclick = onBuildButtonClick
     load(1)
     spawnEntity(0, {x: 17, y: 0})
+    listBuildings()
     mainLoop()
 }
 
@@ -65,10 +72,13 @@ function load(slot) {
 }
 
 function getUtilityFunctions(building) {
-    const buildingName = buildings[building.id]?.name
-    console.log(buildingName)
-    switch (buildingName) {
-        case 'belt':
+    const id = building.id
+    console.log(buildings[id]?.name)
+    switch (id) {
+        case BUILDINGS.BELT_N:
+        case BUILDINGS.BELT_E:
+        case BUILDINGS.BELT_S:
+        case BUILDINGS.BELT_W:
             return [isEntityCollidingWithBelt, moveEntityOnBelt]
         default:
             return [(a, b) => {
@@ -102,7 +112,7 @@ function render() {
     game.scene.clearRect(0, 0, game.scene.canvas.width, game.scene.canvas.height);
     drawBasePattern(game.scene)
     drawGrid(game.scene)
-    drawBuildingInCell(game.scene, {x: 12, y: -3.15}, 0)
+    drawBuildingInCell(game.scene, {x: 12, y: -3.15}, BUILDINGS.MORGUE)
     game.cells.flat()
         .filter(value => !!value)
         .forEach(value => drawBuildingInCell(game.scene, value.position, value.id))
