@@ -1,15 +1,18 @@
+import {EAST, NORTH, SOUTH, WEST} from "./directions.js";
+
 export const BUILDINGS = Object.seal(
     {
-      DEFAULT: -1,
-      MORGUE: 0,
-      BELT_N: 1,
-      BELT_E: 2,
-      BELT_S: 3,
-      BELT_W: 4,
+      DEFAULT: 0,
+      MORGUE: 1,
+      BELT_N: 2,
+      BELT_E: 3,
+      BELT_S: 4,
+      BELT_W: 5,
+      COFFINATOR: 6,
     }
 )
 
-export const buildings = [
+export const buildings = Object.seal([
   {
     id: BUILDINGS.DEFAULT,
     name: "default",
@@ -19,78 +22,49 @@ export const buildings = [
     id: BUILDINGS.MORGUE,
     name: "morgue",
     src: "assets/buildings/morgue.svg",
-    buildable: true
   },
   {
     id: BUILDINGS.BELT_N,
     name: "North facing belt",
     src: "assets/buildings/belt_n.svg",
-    buildable: true
+    state: "NORTH",
+    buildable: true,
+    width: 1,
+    height: 1
   },
   {
     id: BUILDINGS.BELT_E,
     name: "East facing belt",
     src: "assets/buildings/belt_e.svg",
-    buildable: true
+    state: "EAST",
+    buildable: true,
+    width: 1,
+    height: 1
   },
   {
     id: BUILDINGS.BELT_S,
     name: "South facing belt",
     src: "assets/buildings/belt_s.svg",
-    buildable: true
+    state: "SOUTH",
+    buildable: true,
+    width: 1,
+    height: 1
   },
   {
     id: BUILDINGS.BELT_W,
     name: "West facing belt",
     src: "assets/buildings/belt_w.svg",
-    buildable: true
+    state: "WEST",
+    buildable: true,
+    width: 1,
+    height: 1
   },
   {
-    id: BUILDINGS.BELT_W,
-    name: "West facing belt",
-    src: "assets/buildings/belt_w.svg",
-    buildable: true
-  },
-  {
-    id: BUILDINGS.BELT_W,
-    name: "West facing belt",
-    src: "assets/buildings/belt_w.svg",
-    buildable: true
-  },
-  {
-    id: BUILDINGS.BELT_W,
-    name: "West facing belt",
-    src: "assets/buildings/belt_w.svg",
-    buildable: true
-  },
-  {
-    id: BUILDINGS.BELT_W,
-    name: "West facing belt",
-    src: "assets/buildings/belt_w.svg",
-    buildable: true
-  },
-  {
-    id: BUILDINGS.BELT_W,
-    name: "West facing belt",
-    src: "assets/buildings/belt_w.svg",
-    buildable: true
-  },
-  {
-    id: BUILDINGS.BELT_W,
-    name: "West facing belt",
-    src: "assets/buildings/belt_w.svg",
-    buildable: true
-  },
-  {
-    id: BUILDINGS.BELT_W,
-    name: "West facing belt",
-    src: "assets/buildings/belt_w.svg",
-    buildable: true
-  },
-  {
-    id: BUILDINGS.BELT_W,
-    name: "West facing belt",
-    src: "assets/buildings/belt_w.svg",
-    buildable: true
+    id: BUILDINGS.COFFINATOR,
+    name: "Coffinator",
+    src: "assets/buildings/coffinator.svg",
+    buildable: true,
+    width: 2,
+    height: 2
   }
-]
+])

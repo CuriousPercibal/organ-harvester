@@ -49,7 +49,10 @@ export function drawGrid(context) {
 }
 
 export function drawBuildingInCell(context, cell, buildingNumber) {
-    const building = buildings[buildingNumber].img
+    if (buildingNumber === undefined) {
+        return
+    }
+    const building = buildings[buildingNumber]?.img
     drawImage(context, cell, building)
 }
 

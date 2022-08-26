@@ -5,44 +5,48 @@
     "items": [],
     "buildings": [
       {
-        "id": 3,
+        "id": 4,
         "position": {"x": 17, "y": 0},
         "state": "SOUTH"
       },
       {
-        "id": 3,
+        "id": 4,
         "position": {"x": 17, "y": 1},
         "state": "SOUTH"
       },
       {
-        "id": 2,
+        "id": 3,
         "position": {"x": 17, "y": 2},
         "state": "EAST"
       },
       {
-        "id": 2,
+        "id": 3,
         "position": {"x": 18, "y": 2},
         "state": "EAST"
       },
       {
-        "id": 3,
+        "id": 4,
         "position": {"x": 19, "y": 2},
         "state": "SOUTH"
       },
       {
-        "id": 4,
+        "id": 5,
         "position": {"x": 19, "y": 3},
         "state": "WEST"
       },
       {
-        "id": 4,
+        "id": 5,
         "position": {"x": 18, "y": 3},
         "state": "WEST"
       },
       {
-        "id": 1,
+        "id": 2,
         "position": {"x": 17, "y": 3},
         "state": "NORTH"
+      },
+      {
+        "id": 6,
+        "position": {"x": 5, "y": 3}
       }
     ]
   }
