@@ -7,7 +7,7 @@ export let mouseY
 export function onmousemove (event) {
     mouseX = event.offsetX;
     mouseY = event.offsetY;
-    console.log({mouseX, mouseY});
+    //console.log({mouseX, mouseY});
 }
 
 export function onmouseclick(event, game) {

@@ -1,5 +1,7 @@
 import {BUILDINGS, buildings} from "../data/buildings.mjs";
 import {isEntityCollidingWithBelt, moveEntityOnBelt} from "../buildings/belt.mjs";
+import {mouseX, mouseY} from "./events.mjs";
+import {isEntityCollidingWithCoffinator, putInCoffin} from "../buildings/coffinator.mjs";
 
 const buildUI = document.getElementById('build')
 export const buildUIContainer = document.getElementById('build-container')
@@ -13,7 +15,7 @@ const template = `<span><img src="%img"></span>
 </span>`
 export let selectedBuilding = undefined
 const buildButton = document.getElementById('build-button')
-buildButton.onclick =  onBuildButtonClick
+buildButton.onclick = onBuildButtonClick
 const closeBuildUi = document.getElementById('close-building-ui')
 closeBuildUi.onclick = onBuildButtonClick
 
@@ -25,31 +27,31 @@ export function onBuildButtonClick(event) {
 }
 
 export function listBuildings() {
-    for (const building of buildings.filter(building => building.buildable)) {
-        const info = createInfo(building.name, building.src)
-        info.onclick = evt => {selectBuilding(building.id)}
-        buildUI.appendChild(info)
-    }
+    buildings
+        .filter(building => building.buildable)
+        .forEach(building => {
+            const info = createInfo(building.name, building.src)
+            info.onclick = () => selectBuilding(building.id)
+            buildUI.appendChild(info)
+        })
 }
 
 export function placeBuilding(game, building, position) {
-    if (game.cells[position.y][position.x]?.occupied) {
+    const buildingInCell = game.cells[position.y][position.x]
+    if (buildingInCell && buildingInCell.id > BUILDINGS.BELT_W) {
         return
     }
+    game.cells.flat()
+        .filter(value => !!value && value.id > BUILDINGS.BELT_W)
+        .filter(value => value.collider(value, {position: {x: mouseX, y: mouseY}}))
+        .map(value => game.cells[value.position.y][value.position.x] = undefined)
     const [collider, move] = getUtilityFunctions(building)
-    building = Object.assign({}, building)
+    building = Object.assign({collider, interact: move, position}, building)
     console.log(position)
     console.log(collider)
     console.log(move)
-    building.collider = collider
-    building.move = move
-    building.position = position
     game.cells[position.y][position.x] = building
-    for (let i = position.x + 1; i <= position.x + building.width; i++) {
-        for (let j = position.y + 1; j <= position.y + building.height; j++) {
-            game.cells[j][i] = {occupied: true}
-        }
-    }
+
 }
 
 function getUtilityFunctions(building) {
@@ -61,14 +63,14 @@ function getUtilityFunctions(building) {
         case BUILDINGS.BELT_S:
         case BUILDINGS.BELT_W:
             return [isEntityCollidingWithBelt, moveEntityOnBelt]
+        case BUILDINGS.COFFINATOR:
+            return [isEntityCollidingWithCoffinator, putInCoffin]
         default:
-            return [(a, b) => {
-            }, (a, b) => {
-            }]
+            return [doNothing, doNothing]
     }
 }
 
-function createInfo(name = 'placeholder', buildingImage = 'assets/buildings/default.svg', cost = 0, description='Lorem ipsum') {
+function createInfo(name = 'placeholder', buildingImage = 'assets/buildings/default.svg', cost = 0, description = 'Lorem ipsum') {
     const div = document.createElement('div')
     div.className = 'infos'
     div.innerHTML = template.replace('%img', buildingImage)
@@ -80,6 +82,9 @@ function createInfo(name = 'placeholder', buildingImage = 'assets/buildings/defa
 
 export function unselectBuilding() {
     selectedBuilding = undefined;
+}
+
+function doNothing(a, b) {
 }
 
 function selectBuilding(id) {

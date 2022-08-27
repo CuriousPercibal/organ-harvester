@@ -24,16 +24,6 @@ export function spawnEntity(entityId, spawnPosition) {
     firstInactive.position = spawnPosition
 }
 
-export function moveEntity(index, direction) {
-    const entity = POOL.find((value, index1) => index1 === index)
-    if (!entity) {
-        console.log(`Entity with index ${index} not found`)
-        return
-    }
-    const pos = entity.position
-    pos.x += (direction.x * SPEED)
-    pos.y += (direction.y * SPEED)
-    entity.position = pos
-}
+
 
 initPool()

@@ -1,5 +1,7 @@
-import {moveEntity} from "../entities/entity.mjs";
+import {POOL, SPEED} from "../entities/entity.mjs";
 import {EAST, NORTH, SOUTH, WEST} from "../data/directions.js";
+
+const BELT_SPEED = 0.05
 
 export function moveEntityOnBelt(belt, entity) {
     const direction = determineDirection(belt, entity)
@@ -32,6 +34,18 @@ function getDirectionsForFacing(facing) {
         case 'WEST':
             return [SOUTH, NORTH, WEST];
     }
+}
+
+export function moveEntity(index, direction) {
+    const entity = POOL.find((value, index1) => index1 === index)
+    if (!entity) {
+        console.log(`Entity with index ${index} not found`)
+        return
+    }
+    const pos = entity.position
+    pos.x += (direction.x * BELT_SPEED)
+    pos.y += (direction.y * BELT_SPEED)
+    entity.position = pos
 }
 
 function getCenterDirection(belt, entity) {

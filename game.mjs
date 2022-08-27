@@ -32,7 +32,8 @@ export async function init() {
     document.getElementById('bottom').onclick = evt => onmouseclick(evt, game)
 
     drawBackground(window.innerWidth, window.innerHeight)
-    spawnEntity(ITEMS.CORPSE_S, {x: 17, y: 0.5})
+    spawnEntity(ITEMS.CORPSE, {x: 17, y: 0.5})
+    spawnEntity(ITEMS.COFFIN, {x: 17, y: 2.5})
     await loadAssets()
     load(1)
     listBuildings()
@@ -73,22 +74,29 @@ function update() {
     const usage = POOL.filter(value => value.active).length / 10
     console.log(`Pool usage: ${usage}%`)
 
-    POOL.filter(value => value.active)
-        .filter(value => {
-            const x = Math.floor(value.position.x + 0.5)
-            const y = Math.floor(value.position.y + 0.5)
-            const building = game.cells[y][x]
-            const collider = building?.collider
-            return !!collider && collider(building, value)
-        })
-        .forEach(value => {
-            const x = Math.floor(value.position.x)
-            const y = Math.floor(value.position.y)
-            const building = game.cells[y][x]
-            const move = building?.move
-            if (move)
-                move(building, value)
-        })
+    POOL.filter(item => item.active)
+        .filter(isColliding)
+        .forEach(interactWithAllMatch)
+}
+
+function isColliding(item) {
+    const result = game.cells
+        .flat()
+        .some(building => building.collider(building, item))
+    return result
+}
+
+function interactWithAllMatch(item) {
+    const belts = game.cells.flat()
+        .filter(building => building.id <= BUILDINGS.BELT_W)
+        .filter(building => building.collider(building, item))
+    if (belts.length) {
+        belts[0].interact(belts[0], item)
+    }
+    game.cells.flat()
+        .filter(building => building.id > BUILDINGS.BELT_W)
+        .filter(building => building.collider(building, item))
+        .forEach(building => building.interact(building, item))
 }
 
 function render() {
@@ -97,7 +105,10 @@ function render() {
     drawGrid(game.scene)
     drawBuildingInCell(game.scene, {x: 12, y: -3.15}, BUILDINGS.MORGUE)
     game.cells.flat()
-        .filter(value => !!value)
+        .filter(value => !!value && value.id <= BUILDINGS.BELT_W)
+        .forEach(value => drawBuildingInCell(game.scene, value.position, value.id))
+    game.cells.flat()
+        .filter(value => !!value && value.id > BUILDINGS.BELT_W)
         .forEach(value => drawBuildingInCell(game.scene, value.position, value.id))
     POOL.filter(value => value.active)
         .forEach(value => drawItemInCell(game.scene, value.position, value.id))
