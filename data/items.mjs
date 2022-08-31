@@ -1,9 +1,8 @@
 export const ITEMS = {
-    CORPSE: 0,
-    CORPSE_E: 1,
-    CORPSE_S: 2,
-    CORPSE_W: 3,
-    COFFIN: 4,
+    CORPSE: 1,
+    COFFIN: 2,
+    CASKET: 3,
+    URN: 4,
 }
 
 

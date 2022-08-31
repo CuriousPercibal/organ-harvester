@@ -1,3 +1,6 @@
+import {FIRST_NAMES} from "./firstnames.mjs";
+import {LAST_NAMES} from "./lastnames.mjs";
+
 export const SPEED = 0.05
 
 export const POOL_SIZE = 1000
@@ -18,10 +21,13 @@ export function spawnEntity(entityId, spawnPosition) {
         console.log("Max number of entities reached")
         return
     }
+    const firstName = FIRST_NAMES[Math.floor(Math.random()*FIRST_NAMES.length)]
+    const lastName = LAST_NAMES[Math.floor(Math.random()*LAST_NAMES.length)]
 
     firstInactive.active = true
     firstInactive.id = entityId
     firstInactive.position = spawnPosition
+    firstInactive.name = `${firstName} ${lastName}`
 }
 
 

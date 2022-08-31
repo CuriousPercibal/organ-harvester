@@ -9,6 +9,7 @@ export const BUILDINGS = Object.seal(
       BELT_S: 4,
       BELT_W: 5,
       COFFINATOR: 6,
+      BULLDOZER: 7,
     }
 )
 
@@ -66,5 +67,10 @@ export const buildings = Object.seal([
     buildable: true,
     width: 2,
     height: 2
+  },
+  {
+    id: BUILDINGS.BULLDOZER,
+    name: "Bullodozer",
+    src: "assets/items/bulldozer.svg",
   }
 ])

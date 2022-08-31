@@ -1,4 +1,11 @@
-import {buildUIContainer, onBuildButtonClick, placeBuilding, selectedBuilding, unselectBuilding} from "./build.mjs";
+import {
+    buildUIContainer,
+    bulldozer, changeBulldozer,
+    onBuildButtonClick,
+    placeBuilding, remove,
+    selectedBuilding,
+    unselectBuilding
+} from "./build.mjs";
 import {HEIGHT, STD_TILE_WIDTH, WIDTH} from "../game.mjs";
 
 export let mouseX
@@ -15,13 +22,21 @@ export function onmouseclick(event, game) {
         console.log(calculateCellPosition())
         placeBuilding(game, selectedBuilding, calculateCellPosition());
     }
+
+    if (bulldozer) {
+        remove(game, calculateCellPosition())
+    }
 }
 
 export function onkeypress (event) {
     console.log(event.key);
     switch (event.key) {
-        case "q":
+        case 'q':
             onQ()
+            break
+        case 'd':
+            changeBulldozer()
+            break
     }
 }
 
@@ -33,6 +48,10 @@ function onQ() {
 
     if (selectedBuilding) {
         unselectBuilding()
+    }
+
+    if (bulldozer) {
+        changeBulldozer()
     }
 }
 

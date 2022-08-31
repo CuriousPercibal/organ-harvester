@@ -14,6 +14,7 @@ const template = `<span><img src="%img"></span>
     <p>%description</p>
 </span>`
 export let selectedBuilding = undefined
+export let bulldozer = false
 const buildButton = document.getElementById('build-button')
 buildButton.onclick = onBuildButtonClick
 const closeBuildUi = document.getElementById('close-building-ui')
@@ -54,6 +55,10 @@ export function placeBuilding(game, building, position) {
 
 }
 
+export function remove(game, position) {
+    game.cells[position.y][position.x] = undefined
+}
+
 function getUtilityFunctions(building) {
     const id = building.id
     console.log(buildings[id]?.name)
@@ -82,6 +87,10 @@ function createInfo(name = 'placeholder', buildingImage = 'assets/buildings/defa
 
 export function unselectBuilding() {
     selectedBuilding = undefined;
+}
+
+export function changeBulldozer() {
+    bulldozer = !bulldozer
 }
 
 function doNothing(a, b) {

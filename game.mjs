@@ -1,10 +1,10 @@
 import {drawBasePattern, drawBuildingInCell, drawGrid, drawItemInCell} from "./modules/base.mjs";
 import {loadAssets} from "./modules/loader.mjs";
 import {POOL, spawnEntity} from "./entities/entity.mjs";
-import {BUILDINGS} from "./data/buildings.mjs";
-import {listBuildings, placeBuilding, selectedBuilding} from "./ui/build.mjs";
+import {buildings, BUILDINGS} from "./data/buildings.mjs";
+import {bulldozer, listBuildings, placeBuilding, selectedBuilding} from "./ui/build.mjs";
 import {ITEMS} from "./data/items.mjs";
-import {mouseX, mouseY, onkeypress, onmousemove, onmouseclick} from "./ui/events.mjs";
+import {mouseX, mouseY, onkeypress, onmouseclick, onmousemove} from "./ui/events.mjs";
 import {drawBackground} from "./modules/background.mjs";
 
 let game;
@@ -34,6 +34,7 @@ export async function init() {
     drawBackground(window.innerWidth, window.innerHeight)
     spawnEntity(ITEMS.CORPSE, {x: 17, y: 0.5})
     spawnEntity(ITEMS.COFFIN, {x: 17, y: 2.5})
+    console.log(POOL.filter(value => value.active))
     await loadAssets()
     load(1)
     listBuildings()
@@ -80,23 +81,22 @@ function update() {
 }
 
 function isColliding(item) {
-    const result = game.cells
+    return game.cells
         .flat()
-        .some(building => building.collider(building, item))
-    return result
+        .some(building => building?.collider(building, item))
 }
 
 function interactWithAllMatch(item) {
     const belts = game.cells.flat()
-        .filter(building => building.id <= BUILDINGS.BELT_W)
-        .filter(building => building.collider(building, item))
+        .filter(building => building?.id <= BUILDINGS.BELT_W)
+        .filter(building => building?.collider(building, item))
     if (belts.length) {
         belts[0].interact(belts[0], item)
     }
     game.cells.flat()
-        .filter(building => building.id > BUILDINGS.BELT_W)
-        .filter(building => building.collider(building, item))
-        .forEach(building => building.interact(building, item))
+        .filter(building => building?.id > BUILDINGS.BELT_W)
+        .filter(building => building?.collider(building, item))
+        .forEach(building => building?.interact(building, item))
 }
 
 function render() {
@@ -115,5 +115,9 @@ function render() {
 
     if (selectedBuilding) {
         game.scene.drawImage(selectedBuilding.img, mouseX - 32, mouseY - 32)
+    }
+
+    if (bulldozer) {
+        game.scene.drawImage(buildings[BUILDINGS.BULLDOZER].img, mouseX - 32, mouseY - 32)
     }
 }
