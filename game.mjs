@@ -34,6 +34,8 @@ export async function init() {
     drawBackground(window.innerWidth, window.innerHeight)
     spawnEntity(ITEMS.CORPSE, {x: 17, y: 0.5})
     spawnEntity(ITEMS.COFFIN, {x: 17, y: 2.5})
+    spawnEntity(ITEMS.CASKET, {x: 18, y: 3.5})
+    spawnEntity(ITEMS.URN, {x: 19, y: 2.5})
     console.log(POOL.filter(value => value.active))
     await loadAssets()
     load(1)
