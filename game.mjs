@@ -38,6 +38,8 @@ export async function init() {
     spawnEntity(ITEMS.URN, {x: 17, y: 6.5})
     spawnEntity(ITEMS.LIVER, {x: 18, y: 3.5})
     spawnEntity(ITEMS.BAD_LIVER, {x: 18, y: 5.5})
+    spawnEntity(ITEMS.HEART, {x: 18, y: 6.5})
+    spawnEntity(ITEMS.BAD_HEART, {x: 18, y: 7.5})
     console.log(POOL.filter(value => value.active))
     await loadAssets()
     load(1)

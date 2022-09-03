@@ -47,12 +47,12 @@ export const itemSet = [
     {
         "id": ITEMS.HEART,
         "name": "heart",
-        "src": "assets/items/urn.svg"
+        "src": "assets/items/heart.svg"
     },
     {
         "id": ITEMS.BAD_HEART,
         "name": "rotten heart",
-        "src": "assets/items/urn.svg"
+        "src": "assets/items/bad_heart.svg"
     },
     {
         "id": ITEMS.KIDNEY,
