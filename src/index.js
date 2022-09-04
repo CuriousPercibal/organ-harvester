@@ -112,6 +112,7 @@ function render() {
     index.scene.clearRect(0, 0, index.scene.canvas.width, index.scene.canvas.height);
     drawBasePattern(index.scene)
     drawGrid(index.scene)
+    drawBuildingInCell(index.scene, {x: 3, y: -2.15}, BUILDINGS.FUNERAL_HOME)
     drawBuildingInCell(index.scene, {x: 12, y: -3.15}, BUILDINGS.MORGUE)
     index.cells.flat()
         .filter(value => !!value && value.id <= BUILDINGS.BELT_W)

@@ -3,7 +3,7 @@ import {ITEMS} from "../data/items.mjs";
 export function isEntityCollidingWithCoffinator(coffinator, entiy) {
     const x = entiy.position.x - coffinator.position.x
     const y = entiy.position.y - coffinator.position.y
-    return x <= 1.5 && y <= 2 && x >= 0.5 && y >= 0
+    return x <= 1 && y <= 1 && x >= 0 && y >= 0
 }
 
 export function putInCoffin(coffinator, entity) {

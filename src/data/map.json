@@ -5,81 +5,81 @@
     "items": [],
     "buildings": [
       {
-        "id": 4,
+        "id": 6,
         "position": {"x": 17, "y": 0},
         "state": "SOUTH"
       },
       {
-        "id": 4,
+        "id": 6,
         "position": {"x": 17, "y": 1},
         "state": "SOUTH"
       },
       {
-        "id": 4,
+        "id": 6,
         "position": {"x": 17, "y": 2},
         "state": "SOUTH"
       },
       {
-        "id": 4,
+        "id": 6,
         "position": {"x": 17, "y": 3},
         "state": "SOUTH"
       },
       {
-        "id": 4,
+        "id": 6,
         "position": {"x": 17, "y": 4},
         "state": "SOUTH"
       },
       {
-        "id": 4,
+        "id": 6,
         "position": {"x": 17, "y": 5},
         "state": "SOUTH"
       },
       {
-        "id": 4,
+        "id": 6,
         "position": {"x": 17, "y": 6},
         "state": "SOUTH"
       },
       {
-        "id": 4,
+        "id": 6,
         "position": {"x": 17, "y": 7},
         "state": "SOUTH"
       },
       {
-        "id": 3,
+        "id": 5,
         "position": {"x": 17, "y": 8},
         "state": "EAST"
       },
       {
-        "id": 2,
+        "id": 4,
         "position": {"x": 18, "y": 8},
         "state": "NORTH"
       },      {
-        "id": 2,
+        "id": 4,
         "position": {"x": 18, "y": 7},
         "state": "NORTH"
       },
       {
-        "id": 2,
+        "id": 4,
         "position": {"x": 18, "y": 6},
         "state": "NORTH"
       },
       {
-        "id": 2,
+        "id": 4,
         "position": {"x": 18, "y": 5},
         "state": "NORTH"
       },
       {
-        "id": 2,
+        "id": 4,
         "position": {"x": 18, "y": 4},
         "state": "NORTH"
       },
       {
-        "id": 2,
+        "id": 4,
         "position": {"x": 18, "y": 3},
         "state": "NORTH"
       },
       {
-        "id": 5,
+        "id": 6,
         "position": {"x": 18, "y": 2},
         "state": "WEST"
       }
