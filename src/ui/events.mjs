@@ -6,7 +6,7 @@ import {
     selectedBuilding,
     unselectBuilding
 } from "./build.mjs";
-import {HEIGHT, STD_TILE_WIDTH, WIDTH} from "../game.mjs";
+import {HEIGHT, STD_TILE_WIDTH, WIDTH} from "../index.js";
 
 export let mouseX
 export let mouseY

@@ -7,7 +7,7 @@ import {ITEMS} from "./data/items.mjs";
 import {mouseX, mouseY, onkeypress, onmouseclick, onmousemove} from "./ui/events.mjs";
 import {drawBackground} from "./modules/background.mjs";
 
-let game;
+let index;
 export const FPS = 30
 let start = Date.now()
 let frameDuration = 1000 / FPS
@@ -18,18 +18,18 @@ export const HEIGHT = 20;
 
 export async function init() {
     const canvas = createCanvas('scene')
-    game = {
+    index = {
         canvas,
         scene: canvas.getContext('2d'),
         cells: Array(20).fill(undefined).map(() => Array(30))
     }
     document.addEventListener("mousemove", onmousemove);
     document.addEventListener("keypress", onkeypress)
-    canvas.onclick = evt => onmouseclick(evt, game)
-    document.getElementById('top').onclick = evt => onmouseclick(evt, game)
-    document.getElementById('left').onclick = evt => onmouseclick(evt, game)
-    document.getElementById('right').onclick = evt => onmouseclick(evt, game)
-    document.getElementById('bottom').onclick = evt => onmouseclick(evt, game)
+    canvas.onclick = evt => onmouseclick(evt, index)
+    document.getElementById('top').onclick = evt => onmouseclick(evt, index)
+    document.getElementById('left').onclick = evt => onmouseclick(evt, index)
+    document.getElementById('right').onclick = evt => onmouseclick(evt, index)
+    document.getElementById('bottom').onclick = evt => onmouseclick(evt, index)
 
     drawBackground(window.innerWidth, window.innerHeight)
     spawnEntity(ITEMS.CORPSE, {x: 17, y: 0.5})
@@ -76,8 +76,8 @@ function mainLoop() {
 
 function load(slot) {
     const state = JSON.parse(localStorage.getItem('oh_savedgame' + slot))
-    state?.objects?.buildings.forEach(building => placeBuilding(game, building, building.position))
-    console.log(game.cells)
+    state?.objects?.buildings.forEach(building => placeBuilding(index, building, building.position))
+    console.log(index.cells)
 }
 
 function update() {
@@ -90,43 +90,45 @@ function update() {
 }
 
 function isColliding(item) {
-    return game.cells
+    return index.cells
         .flat()
         .some(building => building?.collider(building, item))
 }
 
 function interactWithAllMatch(item) {
-    const belts = game.cells.flat()
+    const belts = index.cells.flat()
         .filter(building => building?.id <= BUILDINGS.BELT_W)
         .filter(building => building?.collider(building, item))
     if (belts.length) {
         belts[0].interact(belts[0], item)
     }
-    game.cells.flat()
+    index.cells.flat()
         .filter(building => building?.id > BUILDINGS.BELT_W)
         .filter(building => building?.collider(building, item))
         .forEach(building => building?.interact(building, item))
 }
 
 function render() {
-    game.scene.clearRect(0, 0, game.scene.canvas.width, game.scene.canvas.height);
-    drawBasePattern(game.scene)
-    drawGrid(game.scene)
-    drawBuildingInCell(game.scene, {x: 12, y: -3.15}, BUILDINGS.MORGUE)
-    game.cells.flat()
+    index.scene.clearRect(0, 0, index.scene.canvas.width, index.scene.canvas.height);
+    drawBasePattern(index.scene)
+    drawGrid(index.scene)
+    drawBuildingInCell(index.scene, {x: 12, y: -3.15}, BUILDINGS.MORGUE)
+    index.cells.flat()
         .filter(value => !!value && value.id <= BUILDINGS.BELT_W)
-        .forEach(value => drawBuildingInCell(game.scene, value.position, value.id))
-    game.cells.flat()
+        .forEach(value => drawBuildingInCell(index.scene, value.position, value.id))
+    index.cells.flat()
         .filter(value => !!value && value.id > BUILDINGS.BELT_W)
-        .forEach(value => drawBuildingInCell(game.scene, value.position, value.id))
+        .forEach(value => drawBuildingInCell(index.scene, value.position, value.id))
     POOL.filter(value => value.active)
-        .forEach(value => drawItemInCell(game.scene, value.position, value.id))
+        .forEach(value => drawItemInCell(index.scene, value.position, value.id))
 
     if (selectedBuilding) {
-        game.scene.drawImage(selectedBuilding.img, mouseX - 32, mouseY - 32)
+        index.scene.drawImage(selectedBuilding.img, mouseX - 32, mouseY - 32)
     }
 
     if (bulldozer) {
-        game.scene.drawImage(buildings[BUILDINGS.DELETE].img, mouseX - 32, mouseY - 32)
+        index.scene.drawImage(buildings[BUILDINGS.DELETE].img, mouseX - 32, mouseY - 32)
     }
 }
+
+init()

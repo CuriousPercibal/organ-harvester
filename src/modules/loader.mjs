@@ -2,6 +2,7 @@ import {BUILDINGS, buildings} from '../data/buildings.mjs'
 import {itemSet} from '../data/items.mjs'
 import {mergerTemplate} from "../buildings/merger.js";
 import {beltTemplate} from "../buildings/belt.mjs";
+import {filterTemplate} from "../buildings/filter.mjs";
 
 export const items = {}
 
@@ -37,6 +38,9 @@ function loadRotatable(id, facing) {
     }
     if ([BUILDINGS.BELT_W, BUILDINGS.BELT_S, BUILDINGS.BELT_N, BUILDINGS.BELT_E].some(value => value === id)) {
         src = fillImageTemplate(beltTemplate, facing)
+    }
+    if ([BUILDINGS.FILTER_N, BUILDINGS.FILTER_E, BUILDINGS.FILTER_S, BUILDINGS.FILTER_W].some(value => value === id)) {
+        src = fillImageTemplate(filterTemplate, facing)
     }
     console.log(src)
     return new Promise((resolve, reject) => {

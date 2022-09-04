@@ -17,56 +17,56 @@ export const itemSet = [
     {
         "id": ITEMS.CORPSE,
         "name": "corpse",
-        "src": "assets/items/corpse.svg"
+        "src": "public/assets/items/corpse.svg"
     },
     {
         "id": ITEMS.COFFIN,
         "name": "coffin",
-        "src": "assets/items/coffin.svg"
+        "src": "public/assets/items/coffin.svg"
     },
     {
         "id": ITEMS.CASKET,
         "name": "casket",
-        "src": "assets/items/casket.svg"
+        "src": "public/assets/items/casket.svg"
     },
     {
         "id": ITEMS.URN,
         "name": "urn",
-        "src": "assets/items/urn.svg"
+        "src": "public/assets/items/urn.svg"
     },
     {
         "id": ITEMS.LIVER,
         "name": "liver",
-        "src": "assets/items/liver.svg"
+        "src": "public/assets/items/liver.svg"
     },
     {
         "id": ITEMS.BAD_LIVER,
         "name": "rotten liver",
-        "src": "assets/items/bad_liver.svg"
+        "src": "public/assets/items/bad_liver.svg"
     },
     {
         "id": ITEMS.HEART,
         "name": "heart",
-        "src": "assets/items/heart.svg"
+        "src": "public/assets/items/heart.svg"
     },
     {
         "id": ITEMS.BAD_HEART,
         "name": "rotten heart",
-        "src": "assets/items/bad_heart.svg"
+        "src": "public/assets/items/bad_heart.svg"
     },
     {
         "id": ITEMS.KIDNEY,
         "name": "kidney",
-        "src": "assets/items/kidney.svg"
+        "src": "public/assets/items/kidney.svg"
     },
     {
         "id": ITEMS.BAD_KIDNEY,
         "name": "rotten kidney",
-        "src": "assets/items/bad_kidney.svg"
+        "src": "public/assets/items/bad_kidney.svg"
     },
     {
         "id": ITEMS.PATIENT,
         "name": "patient",
-        "src": "assets/items/urn.svg"
+        "src": "public/assets/items/urn.svg"
     }
 ]
