@@ -71,6 +71,6 @@ export const buildings = Object.seal([
   {
     id: BUILDINGS.BULLDOZER,
     name: "Bullodozer",
-    src: "assets/items/bulldozer.svg",
+    src: "assets/items/cross.svg",
   }
 ])
