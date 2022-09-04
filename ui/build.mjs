@@ -5,7 +5,7 @@ import {isEntityCollidingWithCoffinator, putInCoffin} from "../buildings/coffina
 
 const buildUI = document.getElementById('build')
 export const buildUIContainer = document.getElementById('build-container')
-const template = `<span><img src="%img"></span>
+const template = `<span>%img</span>
 <span>
     <h2>%name</h2>
     <h2>%cost</h2>
@@ -31,7 +31,7 @@ export function listBuildings() {
     buildings
         .filter(building => building.buildable)
         .forEach(building => {
-            const info = createInfo(building.name, building.src)
+            const info = createInfo(building.name, building.img)
             info.onclick = () => selectBuilding(building.id)
             buildUI.appendChild(info)
         })
@@ -75,10 +75,10 @@ function getUtilityFunctions(building) {
     }
 }
 
-function createInfo(name = 'placeholder', buildingImage = 'assets/buildings/default.svg', cost = 0, description = 'Lorem ipsum') {
+function createInfo(name = 'placeholder', buildingImage = new HTMLImageElement(), cost = 0, description = 'Lorem ipsum') {
     const div = document.createElement('div')
     div.className = 'infos'
-    div.innerHTML = template.replace('%img', buildingImage)
+    div.innerHTML = template.replace('%img', buildingImage.outerHTML)
         .replace('%name', name)
         .replace('%cost', cost + '$')
         .replace('%description', description)

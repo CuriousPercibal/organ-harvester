@@ -9,7 +9,11 @@ export const BUILDINGS = Object.seal(
       BELT_S: 4,
       BELT_W: 5,
       COFFINATOR: 6,
-      BULLDOZER: 7,
+      DELETE: 7,
+      MERGER_N: 8,
+      MERGER_E: 9,
+      MERGER_S: 10,
+      MERGER_W: 11
     }
 )
 
@@ -27,36 +31,32 @@ export const buildings = Object.seal([
   {
     id: BUILDINGS.BELT_N,
     name: "North facing belt",
-    src: "assets/buildings/belt_n.svg",
-    state: "NORTH",
     buildable: true,
+    state: "NORTH",
     width: 1,
     height: 1
   },
   {
     id: BUILDINGS.BELT_E,
     name: "East facing belt",
-    src: "assets/buildings/belt_e.svg",
-    state: "EAST",
     buildable: true,
+    state: "EAST",
     width: 1,
     height: 1
   },
   {
     id: BUILDINGS.BELT_S,
     name: "South facing belt",
-    src: "assets/buildings/belt_s.svg",
-    state: "SOUTH",
     buildable: true,
+    state: "SOUTH",
     width: 1,
     height: 1
   },
   {
     id: BUILDINGS.BELT_W,
     name: "West facing belt",
-    src: "assets/buildings/belt_w.svg",
-    state: "WEST",
     buildable: true,
+    state: "WEST",
     width: 1,
     height: 1
   },
@@ -69,8 +69,40 @@ export const buildings = Object.seal([
     height: 2
   },
   {
-    id: BUILDINGS.BULLDOZER,
-    name: "Bullodozer",
+    id: BUILDINGS.DELETE,
+    name: "Delete",
     src: "assets/items/cross.svg",
-  }
+  },
+  {
+    id: BUILDINGS.MERGER_N,
+    name: "North facing merger",
+    buildable: true,
+    state: "NORTH",
+    width: 1,
+    height: 1
+  },
+  {
+    id: BUILDINGS.MERGER_E,
+    name: "East facing merger",
+    buildable: true,
+    state: "EAST",
+    width: 1,
+    height: 1
+  },
+  {
+    id: BUILDINGS.MERGER_S,
+    name: "South facing merger",
+    buildable: true,
+    state: "SOUTH",
+    width: 1,
+    height: 1
+  },
+  {
+    id: BUILDINGS.MERGER_W,
+    name: "West facing merger",
+    buildable: true,
+    state: "WEST",
+    width: 1,
+    height: 1
+  },
 ])

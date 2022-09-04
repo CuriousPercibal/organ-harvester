@@ -49,6 +49,7 @@ body {
     transform: translate(-50%);
     position: absolute;
     width: 70%;
+    height: 60vh;
     overflow-y: scroll;
 }
 

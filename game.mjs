@@ -43,6 +43,7 @@ export async function init() {
     spawnEntity(ITEMS.KIDNEY, {x: 18, y: 7.5})
     spawnEntity(ITEMS.BAD_KIDNEY, {x: 18, y: 8.5})
     console.log(POOL.filter(value => value.active))
+    console.log(buildings)
     await loadAssets()
     load(1)
     listBuildings()
@@ -126,6 +127,6 @@ function render() {
     }
 
     if (bulldozer) {
-        game.scene.drawImage(buildings[BUILDINGS.BULLDOZER].img, mouseX - 32, mouseY - 32)
+        game.scene.drawImage(buildings[BUILDINGS.DELETE].img, mouseX - 32, mouseY - 32)
     }
 }
