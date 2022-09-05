@@ -1,7 +1,7 @@
 import {FIRST_NAMES} from "./firstnames.mjs";
 import {LAST_NAMES} from "./lastnames.mjs";
 
-export const SPEED = 0.05
+export const SPEED = 0.07
 
 export const POOL_SIZE = 1000
 export const POOL = Array(POOL_SIZE)

@@ -39,10 +39,6 @@ export function listBuildings() {
 }
 
 export function placeBuilding(game, building, position) {
-    const buildingInCell = game.cells[position.y][position.x]
-    if (buildingInCell && buildingInCell.id > BUILDING_ID.BELT_W) {
-        return
-    }
     game.cells.flat()
         .filter(value => !!value && value.id > BUILDING_ID.BELT_W)
         .filter(value => value.collider(value, {position: {x: mouseX, y: mouseY}}))

@@ -1,5 +1,5 @@
 import {POOL} from "../entities/entity.mjs";
-import {EAST, NORTH, SOUTH, WEST} from "../data/directions.js";
+import {EAST, fromName, NORTH, SOUTH, WEST} from "../data/directions.js";
 
 const BELT_SPEED = 0.05
 export const beltTemplate = `
@@ -28,31 +28,24 @@ export function moveEntityOnBelt(belt, entity) {
 }
 
 function determineDirection(belt, entity) {
-    const [x, y] = getCenterDirection(belt, entity)
+    const x = belt.position.x
+    const y = belt.position.y
+    const ex = x - entity.position.x + 0.5
+    const ey = y - entity.position.y + 0.5
     const facing = belt.state.toUpperCase()
-    const [first, second, direction] = getDirectionsForFacing(facing)
-    if (facing === "NORTH" || facing === "SOUTH") {
-        if (x < 0.45) return first
-        if (x > 0.55) return second
+    if ((facing === "NORTH" || facing === "SOUTH") && ex < 0.45) {
+        return WEST
     }
-    if (facing === "EAST" || facing === "WEST") {
-        if (y < 0.45) return first
-        if (y > 0.55) return second
+    if ((facing === "NORTH" || facing === "SOUTH") && ex > 0.55) {
+        return EAST
     }
-    return direction
-}
-
-function getDirectionsForFacing(facing) {
-    switch (facing) {
-        case 'NORTH':
-            return [EAST, WEST, NORTH];
-        case 'SOUTH':
-            return [EAST, WEST, SOUTH];
-        case 'EAST':
-            return [SOUTH, NORTH, EAST];
-        case 'WEST':
-            return [SOUTH, NORTH, WEST];
+    if ((facing === "EAST" || facing === "WEST") && ey < 0.45) {
+        return NORTH
     }
+    if ((facing === "EAST" || facing === "WEST") && ey > 0.55) {
+        return SOUTH
+    }
+    return fromName(facing)
 }
 
 export function moveEntity(index, direction) {
@@ -67,17 +60,10 @@ export function moveEntity(index, direction) {
     entity.position = pos
 }
 
-function getCenterDirection(belt, entity) {
-    const x = Math.round((entity.position.x + 0.5 + Number.EPSILON) * 100) / 100
-    const y = Math.round((entity.position.y + 0.5 + Number.EPSILON) * 100) / 100
-    const bx = belt.position.x
-    const by = belt.position.y
-    const cx = Math.abs(x - bx)
-    const cy = Math.abs(y - by)
-    return [cx, cy]
-}
-
 export function isEntityCollidingWithBelt(belt, entity) {
-    const [x, y] = getCenterDirection(belt, entity)
-    return x <= 1 && y <= 1 && x >= 0 && y >= 0
+    const x = belt.position.x
+    const y = belt.position.y
+    const ex = Math.abs(x - entity.position.x)
+    const ey = Math.abs(y - entity.position.y)
+    return ex < 0.5 && ey <= 0.5
 }
