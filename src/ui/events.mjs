@@ -1,17 +1,19 @@
 import {
     buildUIContainer,
-    bulldozer, changeBulldozer,
+    bulldozer,
+    changeBulldozer,
     onBuildButtonClick,
-    placeBuilding, remove,
+    placeBuilding,
+    remove,
     selectedBuilding,
     unselectBuilding
 } from "./build.mjs";
-import {HEIGHT, STD_TILE_WIDTH, WIDTH} from "../index.js";
+import {STD_TILE_WIDTH} from "../index.js";
 
 export let mouseX
 export let mouseY
 
-export function onmousemove (event) {
+export function onmousemove(event) {
     mouseX = event.offsetX;
     mouseY = event.offsetY;
     //console.log({mouseX, mouseY});
@@ -28,7 +30,7 @@ export function onmouseclick(event, game) {
     }
 }
 
-export function onkeypress (event) {
+export function onkeypress(event) {
     console.log(event.key);
     switch (event.key) {
         case 'q':
@@ -57,8 +59,8 @@ function onQ() {
 
 function calculateCellPosition() {
     const position = {
-        x: Math.floor(mouseX/STD_TILE_WIDTH),
-        y: Math.floor(mouseY/STD_TILE_WIDTH)-3
+        x: Math.floor(mouseX / STD_TILE_WIDTH),
+        y: Math.floor(mouseY / STD_TILE_WIDTH) - 3
     }
     console.log(position)
     return position

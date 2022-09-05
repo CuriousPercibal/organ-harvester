@@ -1,4 +1,4 @@
-import {BUILDINGS, buildings} from '../data/buildings.mjs'
+import {BUILDING_ID, buildings} from '../data/buildings.mjs'
 import {itemSet} from '../data/items.mjs'
 import {mergerTemplate} from "../buildings/merger.js";
 import {beltTemplate} from "../buildings/belt.mjs";
@@ -8,13 +8,12 @@ export const items = {}
 
 export async function loadAssets() {
     for (const tile of buildings) {
+        console.log(tile.id)
         if (tile.src) {
             tile.img = await loadImage(tile.src)
-        }
-        else {
+        } else {
             tile.img = await loadRotatable(tile.id, tile.state)
         }
-        buildings[tile.id] = tile
     }
     for (const item of itemSet) {
         item.img = await loadImage(item.src)
@@ -33,22 +32,16 @@ function loadImage(src) {
 
 function loadRotatable(id, facing) {
     let src;
-    if ([BUILDINGS.MERGER_W, BUILDINGS.MERGER_S, BUILDINGS.MERGER_N, BUILDINGS.MERGER_E].some(value => value === id)) {
+    if (id >= BUILDING_ID.MERGER_N && id <= BUILDING_ID.MERGER_W) {
         src = fillImageTemplate(mergerTemplate, facing)
     }
-    if ([BUILDINGS.BELT_W, BUILDINGS.BELT_S, BUILDINGS.BELT_N, BUILDINGS.BELT_E].some(value => value === id)) {
+    if (id >= BUILDING_ID.BELT_N && id <= BUILDING_ID.BELT_W) {
         src = fillImageTemplate(beltTemplate, facing)
     }
-    if ([BUILDINGS.FILTER_N, BUILDINGS.FILTER_E, BUILDINGS.FILTER_S, BUILDINGS.FILTER_W].some(value => value === id)) {
+    if (id >= BUILDING_ID.FILTER_N && id <= BUILDING_ID.FILTER_W) {
         src = fillImageTemplate(filterTemplate, facing)
     }
-    console.log(src)
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = reject;
-        img.src = URL.createObjectURL(new Blob([src], {type: 'image/svg+xml'}));
-    })
+    return loadImage(URL.createObjectURL(new Blob([src], {type: 'image/svg+xml'})))
 }
 
 function fillImageTemplate(template, facing) {

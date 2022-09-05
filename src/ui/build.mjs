@@ -1,4 +1,4 @@
-import {BUILDINGS, buildings} from "../data/buildings.mjs";
+import {BUILDING_ID, buildings} from "../data/buildings.mjs";
 import {isEntityCollidingWithBelt, moveEntityOnBelt} from "../buildings/belt.mjs";
 import {mouseX, mouseY} from "./events.mjs";
 import {isEntityCollidingWithCoffinator, putInCoffin} from "../buildings/coffinator.mjs";
@@ -20,7 +20,7 @@ buildButton.onclick = onBuildButtonClick
 const closeBuildUi = document.getElementById('close-building-ui')
 closeBuildUi.onclick = onBuildButtonClick
 
-export function onBuildButtonClick(event) {
+export function onBuildButtonClick() {
     console.log('onBuildButtonClick')
     if (buildUIContainer.hidden)
         unselectBuilding()
@@ -29,8 +29,9 @@ export function onBuildButtonClick(event) {
 
 export function listBuildings() {
     buildings
-        .filter(building => building.buildable)
+        .filter(building =>  building.buildable)
         .forEach(building => {
+            console.log(building)
             const info = createInfo(building.name, building.img)
             info.onclick = () => selectBuilding(building.id)
             buildUI.appendChild(info)
@@ -39,11 +40,11 @@ export function listBuildings() {
 
 export function placeBuilding(game, building, position) {
     const buildingInCell = game.cells[position.y][position.x]
-    if (buildingInCell && buildingInCell.id > BUILDINGS.BELT_W) {
+    if (buildingInCell && buildingInCell.id > BUILDING_ID.BELT_W) {
         return
     }
     game.cells.flat()
-        .filter(value => !!value && value.id > BUILDINGS.BELT_W)
+        .filter(value => !!value && value.id > BUILDING_ID.BELT_W)
         .filter(value => value.collider(value, {position: {x: mouseX, y: mouseY}}))
         .map(value => game.cells[value.position.y][value.position.x] = undefined)
     const [collider, move] = getUtilityFunctions(building)
@@ -63,12 +64,12 @@ function getUtilityFunctions(building) {
     const id = building.id
     console.log(buildings[id]?.name)
     switch (id) {
-        case BUILDINGS.BELT_N:
-        case BUILDINGS.BELT_E:
-        case BUILDINGS.BELT_S:
-        case BUILDINGS.BELT_W:
+        case BUILDING_ID.BELT_N:
+        case BUILDING_ID.BELT_E:
+        case BUILDING_ID.BELT_S:
+        case BUILDING_ID.BELT_W:
             return [isEntityCollidingWithBelt, moveEntityOnBelt]
-        case BUILDINGS.COFFINATOR:
+        case BUILDING_ID.COFFINATOR:
             return [isEntityCollidingWithCoffinator, putInCoffin]
         default:
             return [doNothing, doNothing]
