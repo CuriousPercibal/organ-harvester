@@ -1,5 +1,5 @@
-import {items} from './loader.mjs'
 import {buildings} from "../data/buildings.mjs";
+import {items} from "../data/items.mjs";
 
 const offset = 64*3 + 10
 
@@ -57,7 +57,7 @@ export function drawBuildingInCell(context, cell, buildingNumber) {
 }
 
 export function drawItemInCell(context, cell, buildingNumber) {
-    const item = items[buildingNumber].img
+    const item = items[buildingNumber]?.img
     drawImage(context, cell, item)
 }
 

@@ -30,12 +30,7 @@ export function onBuildButtonClick() {
 export function listBuildings() {
     buildings
         .filter(building =>  building.buildable)
-        .forEach(building => {
-            console.log(building)
-            const info = createInfo(building.name, building.img)
-            info.onclick = () => selectBuilding(building.id)
-            buildUI.appendChild(info)
-        })
+        .forEach(insertInfo)
 }
 
 export function placeBuilding(game, building, position) {
@@ -72,7 +67,7 @@ function getUtilityFunctions(building) {
     }
 }
 
-function createInfo(name = 'placeholder', buildingImage = new HTMLImageElement(), cost = 0, description = 'Lorem ipsum') {
+function createInfo(name = 'placeholder', buildingImage, cost = 0, description = 'Lorem ipsum') {
     const div = document.createElement('div')
     div.className = 'infos'
     div.innerHTML = template.replace('%img', buildingImage.outerHTML)
@@ -80,6 +75,12 @@ function createInfo(name = 'placeholder', buildingImage = new HTMLImageElement()
         .replace('%cost', cost + '$')
         .replace('%description', description)
     return div
+}
+
+function insertInfo(building) {
+    const info = createInfo(building.name, building.img)
+    info.onclick = () => selectBuilding(building.id)
+    buildUI.appendChild(info)
 }
 
 export function unselectBuilding() {

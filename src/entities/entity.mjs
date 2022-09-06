@@ -5,7 +5,7 @@ export const SPEED = 0.07
 
 export const POOL_SIZE = 1000
 export const POOL = Array(POOL_SIZE)
-const entityBlueprint = {index: 0, id: -1, active: false, position: {x: 0, y: 0}, state: ""}
+const entityBlueprint = {index: 0, id: -1, active: false, position: {x: 0, y: 0}}
 
 function initPool() {
     for (let i = 0; i < POOL.length; i++) {
@@ -29,7 +29,5 @@ export function spawnEntity(entityId, spawnPosition) {
     firstInactive.position = spawnPosition
     firstInactive.name = `${firstName} ${lastName}`
 }
-
-
 
 initPool()

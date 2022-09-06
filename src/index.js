@@ -1,5 +1,4 @@
 import {drawBasePattern, drawBuildingInCell, drawGrid, drawItemInCell} from "./modules/base.mjs";
-import {loadAssets} from "./modules/loader.mjs";
 import {POOL, spawnEntity} from "./entities/entity.mjs";
 import {buildings, BUILDING_ID} from "./data/buildings.mjs";
 import {bulldozer, listBuildings, placeBuilding, selectedBuilding} from "./ui/build.mjs";
@@ -44,7 +43,6 @@ export async function init() {
     spawnEntity(ITEMS.BAD_KIDNEY, {x: 18, y: 8.5})
     console.log(POOL.filter(value => value.active))
     console.log(buildings)
-    await loadAssets()
     load(1)
     listBuildings()
     mainLoop()

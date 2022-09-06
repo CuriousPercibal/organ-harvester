@@ -1,5 +1,6 @@
 import {POOL} from "../entities/entity.mjs";
 import {EAST, fromName, NORTH, SOUTH, WEST} from "../data/directions.js";
+import {BUILDING_ID} from "../data/buildings.mjs";
 
 const BELT_SPEED = 0.05
 export const beltTemplate = `
@@ -33,19 +34,24 @@ function determineDirection(belt, entity) {
     const ex = x - entity.position.x + 0.5
     const ey = y - entity.position.y + 0.5
     const facing = belt.state.toUpperCase()
-    if ((facing === "NORTH" || facing === "SOUTH") && ex < 0.45) {
+    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex < 0.45) {
         return WEST
     }
-    if ((facing === "NORTH" || facing === "SOUTH") && ex > 0.55) {
+    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex > 0.55) {
         return EAST
     }
-    if ((facing === "EAST" || facing === "WEST") && ey < 0.45) {
+    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey < 0.45) {
         return NORTH
     }
-    if ((facing === "EAST" || facing === "WEST") && ey > 0.55) {
+    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey > 0.55) {
         return SOUTH
     }
-    return fromName(facing)
+    switch (belt.id) {
+        case BUILDING_ID.BELT_N: return NORTH
+        case BUILDING_ID.BELT_E: return EAST
+        case BUILDING_ID.BELT_S: return SOUTH
+        case BUILDING_ID.BELT_W: return WEST
+    }
 }
 
 export function moveEntity(index, direction) {
