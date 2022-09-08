@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+rm -rf game
+rm game.zip
 npm run build
 mkdir game
 cd game || exit

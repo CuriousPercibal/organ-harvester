@@ -1,3 +1,5 @@
+import {loadImage, objectUrlFromTemplate} from "../modules/loader.mjs";
+
 const patientTemplate = `
 <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
     <rect x="20" y="42" width="24" height="10" fill="%neck"/>
@@ -30,7 +32,7 @@ const deceasedFeatures = `
     <line x1="28" x2="40" y1="38" y2="38" stroke="black" stroke-width="1"/>
 `
 
-function createImage(state) {
+export function createImage(state) {
     let palette, features;
     if (state?.toUpperCase() === 'DECEASED') {
         palette = deceasedPatientPalette
@@ -40,18 +42,11 @@ function createImage(state) {
         features = liveFeatures
     }
 
-    const src = patientTemplate.replace('%neck', palette['neck']
+    return patientTemplate.replace('%neck', palette['neck']
         .replace('%head', palette['head'])
         .replace('%eye', palette['eye'])
         .replace('%features', features))
-
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = reject;
-        img.src = URL.createObjectURL(new Blob([src], {type: 'image/svg+xml'}));
-    })
 }
 
-export const deceasedPatientImage = await createImage('DECEASED')
-export const livePatientImage = await createImage('LIVE')
+export const deceasedPatientImage = await loadImage(objectUrlFromTemplate(createImage('DECEASED')))
+export const livePatientImage =  await loadImage(objectUrlFromTemplate(createImage('LIVE')))

@@ -3,6 +3,23 @@ import {mergerTemplate} from "../buildings/merger.js";
 import {beltTemplate} from "../buildings/belt.mjs";
 import {filterTemplate} from "../buildings/filter.mjs";
 import {loadImage, objectUrlFromTemplate} from "../modules/loader.mjs";
+import {coffinatorContent} from "../buildings/coffinator.mjs";
+import {casketinatorContent} from "../buildings/casketinator.mjs";
+import {incineratorContent} from "../buildings/incinerator.mjs";
+
+const buildingTemplate = `
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="64" height="64" fill="#454545" stroke-width="6" stroke="#2f2f2f"/>
+    <rect x="0" y="23" width="2" height="20" fill="#736c5c"/>
+    <rect x="62" y="23" width="2" height="20" fill="#736c5c"/>
+    <line x1="59" x2="54" y1="28" y2="33" stroke-width="2" stroke="#c0f734"/>
+    <line x1="59" x2="54" y1="37" y2="32" stroke-width="2" stroke="#c0f734"/>
+
+    <line x1="10" x2="5" y1="28" y2="33" stroke-width="2" stroke="#c0f734"/>
+    <line x1="10" x2="5" y1="37" y2="32" stroke-width="2" stroke="#c0f734"/>
+    %content
+</svg>
+`
 
 export const BUILDING_ID = Object.seal(
     {
@@ -78,19 +95,19 @@ export const buildings = Array.from([
         id: BUILDING_ID.COFFINATOR,
         name: "Coffinator",
         buildable: true,
-        img: await loadImage("public/assets/buildings/coffinator.svg")
+        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, coffinatorContent)))
     },
     {
         id: BUILDING_ID.CASKETINATOR,
         name: "Casketinator",
         buildable: true,
-        img: await loadImage("public/assets/buildings/casketinator.svg")
+        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, casketinatorContent)))
     },
     {
         id: BUILDING_ID.INCINERATOR,
         name: "Incinerator",
         buildable: true,
-        img: await loadImage("public/assets/buildings/incinerator.svg")
+        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, incineratorContent)))
     },
     {
         id: BUILDING_ID.DELETE,
@@ -171,3 +188,8 @@ function replaceInTemplate(template, deg, t1, t2) {
         .replace('%t1', t1)
         .replace('%t2', t2);
 }
+
+function fillBuildingTemplate(template, content) {
+    return template.replace('%content', content)
+}
+

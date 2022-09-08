@@ -1,12 +1,4 @@
-<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="64" height="64" fill="#454545" stroke-width="6" stroke="#2f2f2f"/>
-    <rect x="0" y="23" width="2" height="20" fill="#736c5c"/>
-    <rect x="62" y="23" width="2" height="20" fill="#736c5c"/>
-    <line x1="59" x2="54" y1="28" y2="33" stroke-width="2" stroke="#c0f734"/>
-    <line x1="59" x2="54" y1="37" y2="32" stroke-width="2" stroke="#c0f734"/>
-
-    <line x1="10" x2="5" y1="28" y2="33" stroke-width="2" stroke="#c0f734"/>
-    <line x1="10" x2="5" y1="37" y2="32" stroke-width="2" stroke="#c0f734"/>
+export const casketinatorContent = `
     <g transform="scale(0.8) translate(8 8)">
         <rect x="16" y="16" width="32" height="1" fill="gray"/>
         <rect x="16" y="32" width="32" height="1" fill="gray"/>
@@ -32,4 +24,4 @@
         <polygon points="21,24 21,63 32,54 32,24" fill="#c9c9c9"/>
         <polygon points="43,24 43,63 32,54 32,24" fill="#5c5959"/>
     </g>
-</svg>
+`
