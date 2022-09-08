@@ -1,7 +1,8 @@
 import {BUILDING_ID, buildings} from "../data/buildings.mjs";
-import {isEntityCollidingWithBelt, moveEntityOnBelt} from "../buildings/belt.mjs";
+import {isColliding, moveEntityOnBelt} from "../buildings/belt.mjs";
 import {mouseX, mouseY} from "./events.mjs";
-import {isEntityCollidingWithCoffinator, putInCoffin} from "../buildings/coffinator.mjs";
+import {ITEMS} from "../data/items.mjs";
+import {corpseTransformator} from "../entities/entity.mjs";
 
 const buildUI = document.getElementById('build')
 export const buildUIContainer = document.getElementById('build-container')
@@ -29,7 +30,7 @@ export function onBuildButtonClick() {
 
 export function listBuildings() {
     buildings
-        .filter(building =>  building.buildable)
+        .filter(building => building.buildable)
         .forEach(insertInfo)
 }
 
@@ -59,9 +60,13 @@ function getUtilityFunctions(building) {
         case BUILDING_ID.BELT_E:
         case BUILDING_ID.BELT_S:
         case BUILDING_ID.BELT_W:
-            return [isEntityCollidingWithBelt, moveEntityOnBelt]
+            return [isColliding, moveEntityOnBelt]
         case BUILDING_ID.COFFINATOR:
-            return [isEntityCollidingWithCoffinator, putInCoffin]
+            return [isColliding, corpseTransformator(ITEMS.COFFIN)]
+        case BUILDING_ID.CASKETINATOR:
+            return [isColliding, corpseTransformator(ITEMS.CASKET)]
+        case BUILDING_ID.INCINERATOR:
+            return [isColliding, corpseTransformator(ITEMS.URN)]
         default:
             return [doNothing, doNothing]
     }

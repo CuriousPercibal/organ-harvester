@@ -1,4 +1,5 @@
 import {ITEMS} from "../data/items.mjs";
+import {setEntityPosition} from "../entities/entity.mjs";
 
 export const coffinatorContent = `
     <g transform="scale(0.8) translate(0 8)">
@@ -20,15 +21,8 @@ export const coffinatorContent = `
     </g>
 `
 
-export function isEntityCollidingWithCoffinator(coffinator, entiy) {
-    const x = entiy.position.x - coffinator.position.x
-    const y = entiy.position.y - coffinator.position.y
-    return x <= 1 && y <= 1 && x >= 0 && y >= 0
-}
-
 export function putInCoffin(coffinator, entity) {
-    if (entity.id === ITEMS.COFFIN)
-        return
     entity.originalId = entity.id
     entity.id = ITEMS.COFFIN
+    setEntityPosition(entity, {x: coffinator.position.x-0.6, y: coffinator.position.y})
 }

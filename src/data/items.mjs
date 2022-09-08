@@ -4,17 +4,17 @@ import {healthyKidneyPalette, kidneyTemplate, rottenKidneyPalette} from "../item
 import {healthyLiverPalette, liverTemplate, rottenLiverPalette} from "../items/liver.mjs";
 
 export const ITEMS = {
-    CORPSE: 1,
-    COFFIN: 2,
-    CASKET: 3,
-    URN: 4,
-    LIVER: 5,
-    BAD_LIVER: 6,
-    HEART: 7,
-    BAD_HEART: 8,
-    KIDNEY: 9,
-    BAD_KIDNEY: 10,
-    PATIENT: 11
+    CORPSE: 0,
+    COFFIN: 1,
+    CASKET: 2,
+    URN: 3,
+    LIVER: 4,
+    BAD_LIVER: 5,
+    HEART: 6,
+    BAD_HEART: 7,
+    KIDNEY: 8,
+    BAD_KIDNEY: 9,
+    PATIENT: 10
 }
 
 export const items = [

@@ -1,5 +1,6 @@
 import {FIRST_NAMES} from "./firstnames.mjs";
 import {LAST_NAMES} from "./lastnames.mjs";
+import {ITEMS} from "../data/items.mjs";
 
 export const SPEED = 0.07
 
@@ -28,6 +29,28 @@ export function spawnEntity(entityId, spawnPosition) {
     firstInactive.id = entityId
     firstInactive.position = spawnPosition
     firstInactive.name = `${firstName} ${lastName}`
+}
+
+export function setEntityPosition(entity, position) {
+    const pos = entity.position
+    pos.x = position.x
+    pos.y = position.y
+}
+
+
+export function corpseTransformator(id) {
+    return function (building, entity) {
+        if (Math.abs(entity.position.y - building.position.y) > 0.1 && building.position.x > building.position.x) {
+            return
+        }
+
+        if (entity.id === ITEMS.CORPSE) {
+            entity.originalId = entity.id
+            entity.id = id
+        }
+
+        setEntityPosition(entity, {x: building.position.x-0.6, y: building.position.y})
+    }
 }
 
 initPool()

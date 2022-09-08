@@ -1,6 +1,6 @@
 import {drawBasePattern, drawBuildingInCell, drawGrid, drawItemInCell} from "./modules/base.mjs";
 import {POOL, spawnEntity} from "./entities/entity.mjs";
-import {buildings, BUILDING_ID} from "./data/buildings.mjs";
+import {BUILDING_ID, buildings} from "./data/buildings.mjs";
 import {bulldozer, listBuildings, placeBuilding, selectedBuilding} from "./ui/build.mjs";
 import {ITEMS} from "./data/items.mjs";
 import {mouseX, mouseY, onkeypress, onmouseclick, onmousemove} from "./ui/events.mjs";
@@ -32,15 +32,15 @@ export async function init() {
 
     drawBackground(window.innerWidth, window.innerHeight)
     spawnEntity(ITEMS.CORPSE, {x: 17, y: 0.5})
-    spawnEntity(ITEMS.COFFIN, {x: 17, y: 2.5})
-    spawnEntity(ITEMS.CASKET, {x: 17, y: 4.5})
-    spawnEntity(ITEMS.URN, {x: 17, y: 6.5})
-    spawnEntity(ITEMS.LIVER, {x: 18, y: 3.5})
-    spawnEntity(ITEMS.BAD_LIVER, {x: 18, y: 4.5})
-    spawnEntity(ITEMS.HEART, {x: 18, y: 5.5})
-    spawnEntity(ITEMS.BAD_HEART, {x: 18, y: 6.5})
-    spawnEntity(ITEMS.KIDNEY, {x: 18, y: 7.5})
-    spawnEntity(ITEMS.BAD_KIDNEY, {x: 18, y: 8.5})
+    spawnEntity(ITEMS.CORPSE, {x: 17, y: 2.5})
+    spawnEntity(ITEMS.CORPSE, {x: 17, y: 4.5})
+    spawnEntity(ITEMS.CORPSE, {x: 17, y: 6.5})
+    spawnEntity(ITEMS.CORPSE, {x: 18, y: 3.5})
+    spawnEntity(ITEMS.CORPSE, {x: 18, y: 4.5})
+    spawnEntity(ITEMS.CORPSE, {x: 18, y: 5.5})
+    spawnEntity(ITEMS.CORPSE, {x: 18, y: 6.5})
+    spawnEntity(ITEMS.CORPSE, {x: 18, y: 7.5})
+    spawnEntity(ITEMS.CORPSE, {x: 18, y: 8.5})
     console.log(POOL.filter(value => value.active))
     console.log(buildings)
     load(1)
