@@ -6,6 +6,8 @@ import {loadImage, objectUrlFromTemplate} from "../modules/loader.mjs";
 import {coffinatorContent} from "../buildings/coffinator.mjs";
 import {casketinatorContent} from "../buildings/casketinator.mjs";
 import {incineratorContent} from "../buildings/incinerator.mjs";
+import {coffinSvg} from "../entities/coffin.mjs";
+import {corpseSvg} from "../entities/corpse.mjs";
 
 const buildingTemplate = `
 <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
@@ -95,13 +97,13 @@ export const buildings = Array.from([
         id: BUILDING_ID.COFFINATOR,
         name: "Coffinator",
         buildable: true,
-        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, coffinatorContent)))
+        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, coffinatorContent.replace('#coffin', coffinSvg).replace('#corpse', corpseSvg))))
     },
     {
         id: BUILDING_ID.CASKETINATOR,
         name: "Casketinator",
         buildable: true,
-        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, casketinatorContent)))
+        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, casketinatorContent.replace('#corpse', corpseSvg))))
     },
     {
         id: BUILDING_ID.INCINERATOR,
@@ -178,15 +180,13 @@ function fillImageTemplate(template, facing) {
             return replaceInTemplate(template, "180", "-64", "-64")
         case "WEST":
             return replaceInTemplate(template, "-90", "-64", "0")
-        default:
-            return replaceInTemplate(template, "0", "0", "0")
     }
 }
 
 function replaceInTemplate(template, deg, t1, t2) {
-    return template.replace('%deg', deg)
-        .replace('%t1', t1)
-        .replace('%t2', t2);
+    return template.replace('#deg', deg)
+        .replace('#t1', t1)
+        .replace('#t2', t2);
 }
 
 function fillBuildingTemplate(template, content) {

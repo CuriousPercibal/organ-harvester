@@ -31,8 +31,8 @@ export async function init() {
     document.getElementById('bottom').onclick = evt => onmouseclick(evt, game)
 
     drawBackground(window.innerWidth, window.innerHeight)
-    spawnEntity(ITEMS.CORPSE, {x: 17, y: 0.5})
-    spawnEntity(ITEMS.CORPSE, {x: 17, y: 2.5})
+    spawnEntity(ITEMS.KIDNEY, {x: 17, y: 0.5})
+    spawnEntity(ITEMS.BAD_KIDNEY, {x: 17, y: 2.5})
     spawnEntity(ITEMS.CORPSE, {x: 17, y: 4.5})
     spawnEntity(ITEMS.CORPSE, {x: 17, y: 6.5})
     spawnEntity(ITEMS.CORPSE, {x: 18, y: 3.5})

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="/"/>
+    <title>Encoder</title>
+    <script type="module">
+        const compressionTable = [
+            ['%%', 'xmlns="http://www.w3.org/2000/svg"'],
+            ['%r', 'rect'],
+            ['%c', 'circle'],
+            ['%e', 'ellipse'],
+            ['%l', 'line'],
+            ['%o', 'polygon'],
+            ['%p', 'path'],
+            ['%d', 'defs'],
+            ['%u', 'use'],
+            ['%w', 'width'],
+            ['%h', 'height']]
+        const attributeTable = [
+            ['%st', 'style'],
+            ['%fi', 'fill'],
+            ['%so', 'stroke'],
+            ['%sw', 'storke-width'],
+            ['%sc', 'stop-color'],
+            ['%of', 'offset'],
+            ['%tr', 'transform'],
+            ['%op', 'opacity'],
+            ['%ts', 'translate'],
+            ['%ro', 'rotate'],
+            ['%pt', 'points'],
+            ['%@', 'href']
+        ]
+
+        export function encode(str) {
+            let result = str.replaceAll(/\n/g, '').replaceAll('  ', '')
+            attributeTable.forEach(value => result = result.replaceAll(value[1], value[0]))
+            compressionTable.forEach(value => result = result.replaceAll(value[1], value[0]))
+            return result
+        }
+
+        export function decode(str) {
+            let result = str
+            attributeTable.forEach(value => result = result.replaceAll(value[0], value[1]))
+            compressionTable.forEach(value => result = result.replaceAll(value[0], value[1]))
+            return result
+        }
+
+        const encodeField = document.getElementById('encode')
+        const decodeField = document.getElementById('decode')
+        document.getElementById('encodeButton').addEventListener('click', onEncode)
+        document.getElementById('decodeButton').addEventListener('click', onDecode)
+
+        function onEncode(ev) {
+            console.log('encode')
+            const text = encodeField.value
+            decodeField.value = encode(text)
+        }
+
+        function onDecode(ev) {
+            const text = decodeField.value
+            encodeField.value = decode(text)
+        }
+    </script>
+</head>
+<body>
+<div>
+    <label for="encode">Encode: </label><textarea id="encode" placeholder="encode"></textarea>
+</div>
+<div>
+    <label for="decode">Decode: </label><textarea id="decode" placeholder="decode"></textarea>
+</div>
+<div>
+    <button id="encodeButton">Encode</button>
+    <button id="decodeButton">Decode</button>
+</div>
+</body>
+</html>

@@ -1,28 +1,26 @@
 <svg width="384" height="192" xmlns="http://www.w3.org/2000/svg">
-    <rect width="300" height="160" fill="#2f2f2f" x="10" y="32"/>
-    <rect width="280" height="160" fill="#325252" x="20" y="32"/>
-    <rect width="320" height="10" fill="#2f2f2f" x="0" y="32"/>
+    <rect width="300" height="170" fill="#325252" stroke="#2f2f2f" stroke-width="10" x="15" y="32"/>
+    <rect width="330" height="10" fill="#2f2f2f" x="0" y="32"/>
     <defs>
         <g id="door">
-            <rect width="37" height="37" fill="#545657" stroke-width="4" stroke="#373838" x="30" y="54"/>
+            <rect width="37" height="37" fill="#545657" stroke-width="3" stroke="#373838" x="30" y="54"/>
             <rect width="5" height="1" fill="#545657" stroke-width="4" stroke="#373838" x="37" y="74"/>
         </g>
     </defs>
-    <use href="#door" transform="translate(0 0)"/>
-    <use href="#door" transform="translate(47 0)"/>
-    <use href="#door" transform="translate(94 0)"/>
-    <use href="#door" transform="translate(0 47)"/>
-    <use href="#door" transform="translate(47 47)"/>
-    <use href="#door" transform="translate(94 47)"/>
-    <use href="#door" transform="translate(0 94)"/>
-    <use href="#door" transform="translate(47 94)"/>
-    <use href="#door" transform="translate(94 94)"/>
+    <use href="#door"/>
+    <use href="#door" x="46"/>
+    <use href="#door" x="92"/>
+    <use href="#door" y="46"/>
+    <use href="#door" y="46" x="46"/>
+    <use href="#door" y="46" x="92"/>
+    <use href="#door" y="92"/>
+    <use href="#door" y="92" x="46"/>
+    <use href="#door" y="92" x="92"/>
     <rect width="100" height="10" fill="#363d3d" x="180" y="140"/>
     <rect width="80" height="50" fill="#1e2121" x="190" y="150"/>
     <rect width="5" height="30" fill="#1e2121" x="230" y="42"/>
     <circle cx="232" cy="75" r="5" fill="yellow"/>
-    <polygon points="160,192 232,75 304,192" style="fill:yellow;fill-opacity:0.1"/>
-    <rect width="20" height="50" fill="#1e2121" x="310" y="100"/>
-    <rect width="50" height="50" fill="#1e2121" x="327" y="150"/>
-    <polygon points="327,100 377,150 327,150" style="fill:#1e2121;stroke:#131414;stroke-width:4"/>
+    <polygon points="160,192 232,75 304,192" fill="yellow" opacity="0.1"/>
+    <polygon points="310,100 330,100 377,150 377,192 327,192 327,150 310,150" fill="#1e2121"/>
+    <polygon points="327,100 377,150 327,150" fill="#1e2121" stroke="#131414" stroke-width="4"/>
 </svg>

@@ -4,18 +4,19 @@ import {BUILDING_ID} from "../data/buildings.mjs";
 const BELT_SPEED = 0.05
 export const beltTemplate = `
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
-    <g transform="rotate(%deg) translate(%t1 %t2)">
+    <defs>
+        <g id="arrow">
+            <line x1="54" x2="31" y1="22" y2="0" stroke="#0f0f0f" stroke-width="4"/>
+            <line x1="10" x2="33" y1="22" y2="0" stroke="#0f0f0f" stroke-width="4"/>
+        </g>
+    </defs>
+    <g transform="rotate(#deg) translate(#t1 #t2)">
         <rect width="44" height="64" fill="#2f2f2f" x="10" y="0" />
-        <line x1="54" x2="31" y1="54" y2="32" stroke="#0f0f0f" stroke-width="4" />
-        <line x1="54" x2="31" y1="70" y2="48" stroke="#0f0f0f" stroke-width="4" />
-        <line x1="54" x2="31" y1="38" y2="16" stroke="#0f0f0f" stroke-width="4" />
-        <line x1="54" x2="31" y1="22" y2="0" stroke="#0f0f0f" stroke-width="4" />
-        <line x1="54" x2="31" y1="6" y2="-16" stroke="#0f0f0f" stroke-width="4" />
-        <line x1="10" x2="33" y1="54" y2="32" stroke="#0f0f0f" stroke-width="4" />
-        <line x1="10" x2="33" y1="70" y2="48" stroke="#0f0f0f" stroke-width="4" />
-        <line x1="10" x2="33" y1="38" y2="16" stroke="#0f0f0f" stroke-width="4" />
-        <line x1="10" x2="33" y1="22" y2="0" stroke="#0f0f0f" stroke-width="4" />
-        <line x1="10" x2="33" y1="6" y2="-16" stroke="#0f0f0f" stroke-width="4" />
+        <use href="#arrow"/>
+        <use href="#arrow" transform="translate(0 -16)"/>
+        <use href="#arrow" transform="translate(0 16)"/>
+        <use href="#arrow" transform="translate(0 32)"/>
+        <use href="#arrow" transform="translate(0 48)"/>
         <line x1="10" x2="10" y1="0" y2="64" stroke="#3f3f3f" stroke-width="4"/>
         <line x1="54" x2="54" y1="0" y2="64" stroke="#3f3f3f" stroke-width="4"/>
     </g>
@@ -32,16 +33,16 @@ function determineDirection(belt, entity) {
     const y = belt.position.y
     const ex = x - entity.position.x + 0.5
     const ey = y - entity.position.y + 0.5
-    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex < 0.45) {
+    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex < 0.49) {
         return WEST
     }
-    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex > 0.55) {
+    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex > 0.51) {
         return EAST
     }
-    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey < 0.45) {
+    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey < 0.49) {
         return NORTH
     }
-    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey > 0.55) {
+    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey > 0.51) {
         return SOUTH
     }
     switch (belt.id) {

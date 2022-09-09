@@ -2,6 +2,8 @@ import {loadImage, objectUrlFromTemplate} from "../modules/loader.mjs";
 import {healthyHeartPalette, heartTemplate, rottenHeartPalette} from "../items/heart.mjs";
 import {healthyKidneyPalette, kidneyTemplate, rottenKidneyPalette} from "../items/kidney.mjs";
 import {healthyLiverPalette, liverTemplate, rottenLiverPalette} from "../items/liver.mjs";
+import {corpseSvg} from "../entities/corpse.mjs";
+import {coffinSvg} from "../entities/coffin.mjs";
 
 export const ITEMS = {
     CORPSE: 0,
@@ -21,12 +23,12 @@ export const items = [
     {
         id: ITEMS.CORPSE,
         name: "corpse",
-        img: await loadImage("public/assets/items/corpse.svg")
+        img: await loadImage(objectUrlFromTemplate(corpseSvg))
     },
     {
         id: ITEMS.COFFIN,
         name: "coffin",
-        img: await loadImage("public/assets/items/coffin.svg")
+        img: await loadImage(objectUrlFromTemplate(coffinSvg))
     },
     {
         id: ITEMS.CASKET,
