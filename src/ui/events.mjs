@@ -8,10 +8,19 @@ import {
     selectedBuilding,
     unselectBuilding
 } from "./build.mjs";
-import {STD_TILE_WIDTH} from "../index.js";
+import {game, setWealth, STD_TILE_WIDTH, wealth} from "../index.js";
+import {BUILDING_ID} from "../data/buildings.mjs";
+import {POOL, spawnEntity} from "../entities/entity.mjs";
 
 export let mouseX
 export let mouseY
+
+const events = {
+    'q': onQ,
+    'd': changeBulldozer,
+    's': save,
+    'l': load,
+}
 
 export function onmousemove(event) {
     mouseX = event.offsetX;
@@ -32,14 +41,9 @@ export function onmouseclick(event, game) {
 
 export function onkeypress(event) {
     console.log(event.key);
-    switch (event.key) {
-        case 'q':
-            onQ()
-            break
-        case 'd':
-            changeBulldozer()
-            break
-    }
+    const func = events[event.key] || (() => {
+    })
+    func()
 }
 
 function onQ() {
@@ -64,4 +68,19 @@ function calculateCellPosition() {
     }
     console.log(position)
     return position
+}
+
+function save() {
+    const buildings = game.cells.flat().filter(value => value.id !== BUILDING_ID.DEFAULT)
+    const items = POOL.filter(value => value.active)
+    const save = {items, buildings, wealth}
+    localStorage.setItem('oh_savedgame', JSON.stringify(save))
+}
+
+export function load() {
+    const state = JSON.parse(localStorage.getItem('oh_savedgame'))
+    state?.buildings.forEach(building => placeBuilding(game, building, building.position))
+    state?.items.forEach(entity => spawnEntity(entity))
+    setWealth(state.wealth)
+    console.log(game.cells)
 }

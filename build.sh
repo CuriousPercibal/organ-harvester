@@ -8,7 +8,7 @@ sed -i 's/\\n//g' dist/main.js
 sed -i 's/    //g' dist/main.js
 mkdir game
 cd game || exit
-cp -r ../public .
-cp -r ../dist .
+cp -r ../public/* .
+cp -r ../dist/* .
 cd ..
 zip -r game ./game

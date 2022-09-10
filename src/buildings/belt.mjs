@@ -1,5 +1,6 @@
 import {EAST, NORTH, SOUTH, WEST} from "../data/directions.js";
 import {BUILDING_ID} from "../data/buildings.mjs";
+import {isCollidingTwoEntity, isCollidingWithAnyEntityAtPosition, POOL} from "../entities/entity.mjs";
 
 const BELT_SPEED = 0.05
 export const beltTemplate = `
@@ -58,9 +59,14 @@ function determineDirection(belt, entity) {
 }
 
 export function moveEntity(entity, direction) {
-    const pos = entity.position
-    pos.x += (direction.x * BELT_SPEED)
-    pos.y += (direction.y * BELT_SPEED)
+    const x = entity.position.x + direction.x * BELT_SPEED
+    const y = entity.position.y + direction.y * BELT_SPEED
+
+    if (isCollidingWithAnyEntityAtPosition(entity, {x, y})) {
+        return
+    }
+
+    entity.position = {x, y}
 }
 
 export function isColliding(belt, entity) {

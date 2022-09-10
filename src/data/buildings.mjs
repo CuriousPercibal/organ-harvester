@@ -73,43 +73,50 @@ export const buildings = Array.from([
         id: BUILDING_ID.BELT_N,
         name: "North facing belt",
         buildable: true,
-        img: await loadRotatable(beltTemplate,"NORTH")
+        img: await loadRotatable(beltTemplate,"NORTH"),
+        description: "Moves items to the north direction."
     },
     {
         id: BUILDING_ID.BELT_E,
         name: "East facing belt",
         buildable: true,
-        img: await loadRotatable(beltTemplate,"EAST")
+        img: await loadRotatable(beltTemplate,"EAST"),
+        description: "Moves items to the east direction."
     },
     {
         id: BUILDING_ID.BELT_S,
         name: "South facing belt",
         buildable: true,
-        img: await loadRotatable(beltTemplate,"SOUTH")
+        img: await loadRotatable(beltTemplate,"SOUTH"),
+        description: "Moves items to the south direction."
     },
     {
         id: BUILDING_ID.BELT_W,
         name: "West facing belt",
         buildable: true,
-        img: await loadRotatable(beltTemplate,"WEST")
+        img: await loadRotatable(beltTemplate,"WEST"),
+        description: "Moves items to the west direction."
     },
     {
         id: BUILDING_ID.COFFINATOR,
         name: "Coffinator",
         buildable: true,
-        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, coffinatorContent.replace('#coffin', coffinSvg).replace('#corpse', corpseSvg))))
+        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, coffinatorContent.replace('#coffin', coffinSvg).replace('#corpse', corpseSvg)))),
+        description: "Puts a corpse into a coffin."
     },
     {
         id: BUILDING_ID.CASKETINATOR,
         name: "Casketinator",
         buildable: true,
-        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, casketinatorContent.replace('#corpse', corpseSvg))))
+        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, casketinatorContent.replace('#corpse', corpseSvg)))),
+        description: "Puts a corpse into a casket."
     },
     {
         id: BUILDING_ID.INCINERATOR,
         name: "Incinerator",
         buildable: true,
-        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, incineratorContent)))
+        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, incineratorContent))),
+        description: "Incinerates a corpse and puts its ashes into a urn."
     },
     {
         id: BUILDING_ID.DELETE,

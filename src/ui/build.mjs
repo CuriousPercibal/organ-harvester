@@ -83,7 +83,7 @@ function createInfo(name = 'placeholder', buildingImage, cost = 0, description =
 }
 
 function insertInfo(building) {
-    const info = createInfo(building.name, building.img)
+    const info = createInfo(building.name, building.img, building.cost, building.description)
     info.onclick = () => selectBuilding(building.id)
     buildUI.appendChild(info)
 }

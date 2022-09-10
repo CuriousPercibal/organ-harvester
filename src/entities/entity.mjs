@@ -13,17 +13,27 @@ function initPool() {
     return pool
 }
 
-export function spawnEntity(entityId, spawnPosition) {
+function findFirstActive() {
     let firstInactive = POOL.find(value => !value?.active)
     if (!firstInactive) {
         console.error("Max number of entities reached")
-        return
+        return undefined
     }
+    return firstInactive
+}
+
+export function spawnEntityWithId(entityId, spawnPosition) {
+    const firstInactive = findFirstActive()
     Object.assign(firstInactive, {
         active: true,
         id: entityId,
         position: spawnPosition,
         name: `Patient #${Math.floor(Math.random() * 100000)}`})
+}
+
+export function spawnEntity(entity) {
+    const firstInactive = findFirstActive()
+    Object.assign(firstInactive, entity)
 }
 
 export function setEntityPosition(entity, position) {
@@ -36,11 +46,31 @@ export function corpseTransformator(id) {
             return
         }
 
+        const newPosition = {x: building.position.x - 0.6, y: building.position.y}
+
+        if (isCollidingWithAnyEntityAtPosition(newPosition, newPosition)) {
+            return
+        }
+
         if (entity.id === ITEMS.CORPSE) {
             entity.originalId = entity.id
             entity.id = id
         }
 
-        setEntityPosition(entity, {x: building.position.x - 0.6, y: building.position.y})
+        setEntityPosition(entity, newPosition)
     }
+}
+
+export function isCollidingWithAnyEntityAtPosition(entity, position) {
+    return POOL.filter(value => value.index !== entity.index)
+        .filter(value => value.active)
+        .some(value => isCollidingTwoEntity({position}, value))
+}
+
+export function isCollidingTwoEntity(entity, otherEntity) {
+    const x = otherEntity.position.x
+    const y = otherEntity.position.y
+    const ex = Math.abs(x - entity.position.x)
+    const ey = Math.abs(y - entity.position.y)
+    return ex < 0.5 && ey <= 1
 }

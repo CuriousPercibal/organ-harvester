@@ -1,12 +1,12 @@
 import {drawBasePattern, drawBuildingInCell, drawGrid, drawItemInCell} from "./modules/base.mjs";
-import {POOL, spawnEntity} from "./entities/entity.mjs";
+import {POOL, spawnEntityWithId} from "./entities/entity.mjs";
 import {BUILDING_ID, buildings} from "./data/buildings.mjs";
-import {bulldozer, listBuildings, placeBuilding, selectedBuilding} from "./ui/build.mjs";
+import {bulldozer, listBuildings, selectedBuilding} from "./ui/build.mjs";
 import {ITEMS} from "./data/items.mjs";
-import {mouseX, mouseY, onkeypress, onmouseclick, onmousemove} from "./ui/events.mjs";
+import {load, mouseX, mouseY, onkeypress, onmouseclick, onmousemove} from "./ui/events.mjs";
 import {drawBackground} from "./modules/background.mjs";
 
-let game;
+export let game;
 export const FPS = 30
 let start = Date.now()
 let frameDuration = 1000 / FPS
@@ -14,6 +14,7 @@ let lag = 0;
 export const STD_TILE_WIDTH = 64;
 export const WIDTH = 30;
 export const HEIGHT = 20;
+export let wealth = 0;
 
 export async function init() {
     const canvas = createCanvas('scene')
@@ -31,19 +32,19 @@ export async function init() {
     document.getElementById('bottom').onclick = evt => onmouseclick(evt, game)
 
     drawBackground(window.innerWidth, window.innerHeight)
-    spawnEntity(ITEMS.KIDNEY, {x: 17, y: 0.5})
-    spawnEntity(ITEMS.BAD_KIDNEY, {x: 17, y: 2.5})
-    spawnEntity(ITEMS.CORPSE, {x: 17, y: 4.5})
-    spawnEntity(ITEMS.CORPSE, {x: 17, y: 6.5})
-    spawnEntity(ITEMS.CORPSE, {x: 18, y: 3.5})
-    spawnEntity(ITEMS.CORPSE, {x: 18, y: 4.5})
-    spawnEntity(ITEMS.CORPSE, {x: 18, y: 5.5})
-    spawnEntity(ITEMS.CORPSE, {x: 18, y: 6.5})
-    spawnEntity(ITEMS.CORPSE, {x: 18, y: 7.5})
-    spawnEntity(ITEMS.CORPSE, {x: 18, y: 8.5})
+    spawnEntityWithId(ITEMS.KIDNEY, {x: 17, y: 0.5})
+    spawnEntityWithId(ITEMS.BAD_KIDNEY, {x: 17, y: 2.5})
+    spawnEntityWithId(ITEMS.CORPSE, {x: 17, y: 4.5})
+    spawnEntityWithId(ITEMS.CORPSE, {x: 17, y: 6.5})
+    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 3.5})
+    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 4.5})
+    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 5.5})
+    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 6.5})
+    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 7.5})
+    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 8.5})
     console.log(POOL.filter(value => value.active))
     console.log(buildings)
-    load(1)
+    load()
     listBuildings()
     mainLoop()
 }
@@ -72,11 +73,6 @@ function mainLoop() {
     render(lagOffset);
 }
 
-function load(slot) {
-    const state = JSON.parse(localStorage.getItem('oh_savedgame' + slot))
-    state?.objects?.buildings.forEach(building => placeBuilding(game, building, building.position))
-    console.log(game.cells)
-}
 
 function update() {
     const usage = POOL.filter(value => value.active).length / 10
@@ -104,6 +100,10 @@ function interactWithAllMatch(item) {
         .filter(building => building?.id > BUILDING_ID.BELT_W)
         .filter(building => building?.collider(building, item))
         .forEach(building => building?.interact(building, item))
+}
+
+export function setWealth(amount) {
+    wealth = amount
 }
 
 function render() {
