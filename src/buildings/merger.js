@@ -11,3 +11,7 @@ export const mergerTemplate = `
     </g>
 </svg>
 `
+
+export function merge(building, entity) {
+
+}

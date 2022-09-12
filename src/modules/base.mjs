@@ -31,17 +31,13 @@ export function drawBasePattern(context) {
 export function drawGrid(context) {
     const canvas = context.canvas
     const cellWidth = 64
-    const cellHeight = 64
     let x = 0;
-    let y = offset
     context.beginPath()
     for(; x < canvas.width; x += cellWidth) {
-        context.moveTo(x, y)
+        context.moveTo(x, offset)
         context.lineTo(x, canvas.height)
-    }
-    for(; y < canvas.height; y += cellHeight) {
-        context.moveTo(0, y)
-        context.lineTo(canvas.width, y)
+        context.moveTo(0, x + offset)
+        context.lineTo(canvas.width, x + offset)
     }
     context.strokeStyle = "#15172f"
     context.lineWidth = 4
