@@ -1,6 +1,6 @@
 export const filterTemplate = `
 <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
-    <g transform="rotate(%deg) translate(%t1 %t2)">
+    <g transform="rotate(#deg) translate(#t1 #t2)">
         <rect width="64" height="64" fill="#2f2f2f" x="0" y="0" stroke="#5f5f5f" stroke-width="4"/>
         <line x1="33" x2="20" y1="15" y2="5" stroke-width="2" stroke="#c0f734"/>
         <line x1="32" x2="45" y1="15" y2="5" stroke-width="2" stroke="#c0f734"/>

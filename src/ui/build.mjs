@@ -4,6 +4,7 @@ import {mouseX, mouseY} from "./events.mjs";
 import {ITEMS} from "../data/items.mjs";
 import {corpseTransformator} from "../entities/entity.mjs";
 import {dispose} from "../buildings/disposal.mjs";
+import {merge} from "../buildings/merger.js";
 
 const buildUI = document.getElementById('build')
 export const buildUIContainer = document.getElementById('build-container')
@@ -70,6 +71,11 @@ function getUtilityFunctions(building) {
             return [isColliding, corpseTransformator(ITEMS.URN)]
         case BUILDING_ID.BIOHAZARD:
             return [isColliding, dispose]
+        case BUILDING_ID.MERGER_N:
+        case BUILDING_ID.MERGER_E:
+        case BUILDING_ID.MERGER_S:
+        case BUILDING_ID.MERGER_W:
+            return [isColliding, merge()]
         default:
             return [doNothing, doNothing]
     }

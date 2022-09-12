@@ -1,4 +1,4 @@
-import {EAST, NORTH, SOUTH, WEST} from "../data/directions.js";
+import {EAST, NORTH, SOUTH, WEST} from "../data/directions.mjs";
 import {BUILDING_ID} from "../data/buildings.mjs";
 import {isCollidingWithAnyEntityAtPosition} from "../entities/entity.mjs";
 

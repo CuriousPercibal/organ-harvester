@@ -1,4 +1,4 @@
-import {EAST, NORTH, SOUTH, WEST} from "./directions.js";
+import {EAST, NORTH, SOUTH, WEST} from "./directions.mjs";
 import {mergerTemplate} from "../buildings/merger.js";
 import {beltTemplate} from "../buildings/belt.mjs";
 import {filterTemplate} from "../buildings/filter.mjs";
