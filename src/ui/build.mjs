@@ -38,9 +38,8 @@ export function listBuildings() {
 
 export function placeBuilding(game, building, position) {
     game.cells.flat()
-        .filter(value => !!value && value.id > BUILDING_ID.BELT_W)
-        .filter(value => value.collider(value, {position: {x: mouseX, y: mouseY}}))
-        .map(value => game.cells[value.position.y][value.position.x] = undefined)
+        .filter(value => value?.collider(value, {position: {x: mouseX, y: mouseY}}))
+        .map(value => game.cells[value.position.y][value.position.x] = { id: BUILDING_ID.DEFAULT })
     const [collider, move] = getUtilityFunctions(building)
     building = Object.assign({collider, interact: move, position}, building)
     console.log(position)
@@ -51,11 +50,12 @@ export function placeBuilding(game, building, position) {
 }
 
 export function remove(game, position) {
-    game.cells[position.y][position.x] = undefined
+    const [collider, interact] = getUtilityFunctions()
+    game.cells[position.y][position.x] = {collider, interact}
 }
 
 function getUtilityFunctions(building) {
-    const id = building.id
+    const id = building?.id
     console.log(buildings[id]?.name)
     switch (id) {
         case BUILDING_ID.BELT_N:

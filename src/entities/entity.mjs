@@ -58,6 +58,7 @@ export function corpseTransformator(id) {
         }
 
         setEntityPosition(entity, newPosition)
+        console.log()
     }
 }
 
@@ -72,5 +73,5 @@ export function isCollidingTwoEntity(entity, otherEntity) {
     const y = otherEntity.position.y
     const ex = Math.abs(x - entity.position.x)
     const ey = Math.abs(y - entity.position.y)
-    return ex < 0.3 && ey <= 1
+    return ex < 0.4 && ey <= 0.9
 }

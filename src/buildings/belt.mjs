@@ -34,16 +34,16 @@ function determineDirection(belt, entity) {
     const y = belt.position.y
     const ex = x - entity.position.x + 0.5
     const ey = y - entity.position.y + 0.5
-    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex < 0.49) {
+    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex < 0.45) {
         return WEST
     }
-    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex > 0.51) {
+    if ((belt.id === BUILDING_ID.BELT_N || belt.id === BUILDING_ID.BELT_S) && ex > 0.55) {
         return EAST
     }
-    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey < 0.49) {
+    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey < 0.45) {
         return NORTH
     }
-    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey > 0.51) {
+    if ((belt.id === BUILDING_ID.BELT_E || belt.id === BUILDING_ID.BELT_W) && ey > 0.55) {
         return SOUTH
     }
     switch (belt.id) {

@@ -118,6 +118,7 @@ function render() {
     drawBuildingInCell(game.scene, {x: 3, y: -2.15}, BUILDING_ID.FUNERAL_HOME)
     drawBuildingInCell(game.scene, {x: 12, y: -3.15}, BUILDING_ID.MORGUE)
     game.cells.flat()
+        .filter(value => value)
         .forEach(value => drawBuildingInCell(game.scene, value.position, value.id))
     POOL.filter(value => value.active)
         .forEach(value => drawItemInCell(game.scene, value.position, value.id))
