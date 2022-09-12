@@ -1,6 +1,6 @@
 import {EAST, NORTH, SOUTH, WEST} from "../data/directions.js";
 import {BUILDING_ID} from "../data/buildings.mjs";
-import {isCollidingTwoEntity, isCollidingWithAnyEntityAtPosition, POOL} from "../entities/entity.mjs";
+import {isCollidingWithAnyEntityAtPosition} from "../entities/entity.mjs";
 
 const BELT_SPEED = 0.05
 export const beltTemplate = `

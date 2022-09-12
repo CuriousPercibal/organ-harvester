@@ -8,7 +8,7 @@ import {
     selectedBuilding,
     unselectBuilding
 } from "./build.mjs";
-import {game, setWealth, STD_TILE_WIDTH, wealth} from "../index.js";
+import {containerDiv, game, setWealth, STD_TILE_WIDTH, wealth} from "../index.js";
 import {BUILDING_ID} from "../data/buildings.mjs";
 import {POOL, spawnEntity} from "../entities/entity.mjs";
 
@@ -23,9 +23,10 @@ const events = {
 }
 
 export function onmousemove(event) {
-    mouseX = event.offsetX;
-    mouseY = event.offsetY;
-    //console.log({mouseX, mouseY});
+    console.log({left: containerDiv.offsetLeft, top: containerDiv.offsetTop})
+    mouseX = event.pageX - containerDiv.offsetLeft
+    mouseY = event.pageY - containerDiv.offsetTop
+    console.log({mouseX, mouseY});
 }
 
 export function onmouseclick(event, game) {
@@ -41,8 +42,7 @@ export function onmouseclick(event, game) {
 
 export function onkeypress(event) {
     console.log(event.key);
-    const func = events[event.key] || (() => {
-    })
+    const func = events[event.key] || (() => {})
     func()
 }
 

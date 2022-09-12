@@ -94,6 +94,8 @@ export function unselectBuilding() {
 
 export function changeBulldozer() {
     bulldozer = !bulldozer
+
+    if (bulldozer) unselectBuilding()
 }
 
 function doNothing(a, b) {

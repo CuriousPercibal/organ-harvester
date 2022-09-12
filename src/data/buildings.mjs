@@ -44,7 +44,8 @@ export const BUILDING_ID = Object.seal(
         FILTER_N: 16,
         FILTER_E: 17,
         FILTER_S: 18,
-        FILTER_W: 19
+        FILTER_W: 19,
+        BIOHAZARD: 20
     }
 )
 
@@ -170,6 +171,12 @@ export const buildings = Array.from([
         name: "West facing filter",
         buildable: true,
         img: await loadRotatable(filterTemplate,"WEST")
+    },
+    {
+        id: BUILDING_ID.BIOHAZARD,
+        name: "Biohazard disposal",
+        buildable: true,
+        img: await loadImage("public/assets/buildings/biohazard.svg")
     },
 ])
 

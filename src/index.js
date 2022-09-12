@@ -7,6 +7,7 @@ import {load, mouseX, mouseY, onkeypress, onmouseclick, onmousemove} from "./ui/
 import {drawBackground} from "./modules/background.mjs";
 
 export let game;
+export const containerDiv = document.getElementById('game')
 export const FPS = 30
 let start = Date.now()
 let frameDuration = 1000 / FPS
@@ -23,13 +24,17 @@ export async function init() {
         scene: canvas.getContext('2d'),
         cells: Array(20).fill(undefined).map(() => Array(30))
     }
-    document.addEventListener("mousemove", onmousemove);
     document.addEventListener("keypress", onkeypress)
-    canvas.onclick = evt => onmouseclick(evt, game)
-    document.getElementById('top').onclick = evt => onmouseclick(evt, game)
-    document.getElementById('left').onclick = evt => onmouseclick(evt, game)
-    document.getElementById('right').onclick = evt => onmouseclick(evt, game)
-    document.getElementById('bottom').onclick = evt => onmouseclick(evt, game)
+    Array.of(
+        document.getElementById('scene'),
+        document.getElementById('top'),
+        document.getElementById('left'),
+        document.getElementById('right'),
+        document.getElementById('bottom')
+    ).forEach(value => {
+        value.addEventListener("mousemove", onmousemove)
+        value.onclick = evt => onmouseclick(evt, game)
+    })
 
     drawBackground(window.innerWidth, window.innerHeight)
     spawnEntityWithId(ITEMS.KIDNEY, {x: 17, y: 0.5})
