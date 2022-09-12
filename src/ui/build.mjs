@@ -5,6 +5,7 @@ import {ITEMS} from "../data/items.mjs";
 import {corpseTransformator} from "../entities/entity.mjs";
 import {dispose} from "../buildings/disposal.mjs";
 import {merge} from "../buildings/merger.js";
+import {setWealth, wealth} from "../index.js";
 
 const buildUI = document.getElementById('build')
 export const buildUIContainer = document.getElementById('build-container')
@@ -37,6 +38,7 @@ export function listBuildings() {
 }
 
 export function placeBuilding(game, building, position) {
+    remove(game, position)
     game.cells.flat()
         .filter(value => value?.collider(value, {position: {x: mouseX, y: mouseY}}))
         .map(value => game.cells[value.position.y][value.position.x] = undefined)
@@ -46,11 +48,15 @@ export function placeBuilding(game, building, position) {
     console.log(collider)
     console.log(move)
     game.cells[position.y][position.x] = building
-
+    const cost = building.cost || 0
+    setWealth(wealth-cost);
 }
 
 export function remove(game, position) {
     const [collider, interact] = getUtilityFunctions()
+    const id = game.cells[position.y][position.x]?.id || 0
+    const cost = buildings.find(value => value.id === id)?.cost || 0
+    setWealth(wealth + cost)
     game.cells[position.y][position.x] = {collider, interact}
 }
 

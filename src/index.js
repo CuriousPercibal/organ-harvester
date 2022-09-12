@@ -9,13 +9,14 @@ import {drawBackground} from "./modules/background.mjs";
 export let game;
 export const containerDiv = document.getElementById('game')
 export const FPS = 30
+const wealthHeader = document.getElementById('wealth')
 let start = Date.now()
 let frameDuration = 1000 / FPS
 let lag = 0;
 export const STD_TILE_WIDTH = 64;
 export const WIDTH = 30;
 export const HEIGHT = 20;
-export let wealth = 0;
+export let wealth = 10000;
 
 export async function init() {
     const canvas = createCanvas('scene')
@@ -112,6 +113,7 @@ export function setWealth(amount) {
 }
 
 function render() {
+    wealthHeader.innerText = `$${wealth}`
     game.scene.clearRect(0, 0, game.scene.canvas.width, game.scene.canvas.height);
     drawBasePattern(game.scene)
     drawGrid(game.scene)

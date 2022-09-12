@@ -20,6 +20,16 @@
     overflow: hidden;
 }
 
+#wealth {
+    z-index: 2;
+    position: fixed;
+    top: 1em;
+    left: 1em;
+    font-size: 24pt;
+    color: #ffc338;
+    background-color: rgba(0,0,0,0);
+}
+
 button {
     z-index: 4;
     position: fixed;
