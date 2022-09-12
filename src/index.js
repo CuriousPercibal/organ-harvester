@@ -1,5 +1,5 @@
 import {drawBasePattern, drawBuildingInCell, drawGrid, drawItemInCell} from "./modules/base.mjs";
-import {POOL, spawnEntityWithId} from "./entities/entity.mjs";
+import {POOL, spawnCorpse, spawnEntityWithId} from "./entities/entity.mjs";
 import {BUILDING_ID, buildings} from "./data/buildings.mjs";
 import {bulldozer, listBuildings, selectedBuilding} from "./ui/build.mjs";
 import {ITEMS} from "./data/items.mjs";
@@ -38,20 +38,11 @@ export async function init() {
     })
 
     drawBackground(4000, 4000)
-    spawnEntityWithId(ITEMS.KIDNEY, {x: 17, y: 0.5})
-    spawnEntityWithId(ITEMS.BAD_KIDNEY, {x: 17, y: 2.5})
-    spawnEntityWithId(ITEMS.CORPSE, {x: 17, y: 4.5})
-    spawnEntityWithId(ITEMS.CORPSE, {x: 17, y: 6.5})
-    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 3.5})
-    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 4.5})
-    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 5.5})
-    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 6.5})
-    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 7.5})
-    spawnEntityWithId(ITEMS.CORPSE, {x: 18, y: 8.5})
     console.log(POOL.filter(value => value.active))
     console.log(buildings)
     load()
     listBuildings()
+    spawnCorpse()
     mainLoop()
 }
 

@@ -24,11 +24,14 @@ function findFirstActive() {
 
 export function spawnEntityWithId(entityId, spawnPosition) {
     const firstInactive = findFirstActive()
+    const value = (Math.floor(Math.random()*50) + 50)*10
     Object.assign(firstInactive, {
         active: true,
         id: entityId,
         position: spawnPosition,
-        name: `Patient #${Math.floor(Math.random() * 100000)}`})
+        name: `Patient #${Math.floor(Math.random() * 100000)}`,
+        value
+    })
 }
 
 export function spawnEntity(entity) {
@@ -73,4 +76,14 @@ export function isCollidingTwoEntity(entity, otherEntity) {
     const ex = Math.abs(x - entity.position.x)
     const ey = Math.abs(y - entity.position.y)
     return ex < 0.4 && ey <= 0.9
+}
+
+export function spawnCorpse() {
+    const next = Math.floor(Math.random()*3000)+1000
+    setTimeout(() => {
+        if (!isCollidingWithAnyEntityAtPosition({index: -1}, {x:15, y:0})) {
+            spawnEntityWithId(ITEMS.CORPSE, {x:15, y:0})
+        }
+        spawnCorpse()
+    },next)
 }

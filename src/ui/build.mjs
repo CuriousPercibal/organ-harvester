@@ -4,7 +4,6 @@ import {mouseX, mouseY} from "./events.mjs";
 import {ITEMS} from "../data/items.mjs";
 import {corpseTransformator} from "../entities/entity.mjs";
 import {dispose} from "../buildings/disposal.mjs";
-import {merge} from "../buildings/merger.js";
 import {setWealth, wealth} from "../index.js";
 
 const buildUI = document.getElementById('build')
@@ -53,11 +52,10 @@ export function placeBuilding(game, building, position) {
 }
 
 export function remove(game, position) {
-    const [collider, interact] = getUtilityFunctions()
     const id = game.cells[position.y][position.x]?.id || 0
     const cost = buildings.find(value => value.id === id)?.cost || 0
     setWealth(wealth + cost)
-    game.cells[position.y][position.x] = {collider, interact}
+    game.cells[position.y][position.x] = undefined
 }
 
 function getUtilityFunctions(building) {
@@ -77,11 +75,6 @@ function getUtilityFunctions(building) {
             return [isColliding, corpseTransformator(ITEMS.URN)]
         case BUILDING_ID.BIOHAZARD:
             return [isColliding, dispose]
-        case BUILDING_ID.MERGER_N:
-        case BUILDING_ID.MERGER_E:
-        case BUILDING_ID.MERGER_S:
-        case BUILDING_ID.MERGER_W:
-            return [isColliding, merge()]
         default:
             return [doNothing, doNothing]
     }

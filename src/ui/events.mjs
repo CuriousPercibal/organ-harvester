@@ -78,8 +78,15 @@ function save() {
 
 export function load() {
     const state = JSON.parse(localStorage.getItem('oh_savedgame'))
-    state?.buildings.forEach(building => placeBuilding(game, building, building.position))
-    state?.items.forEach(entity => spawnEntity(entity))
-    setWealth(state.wealth || 0)
+    console.log(state)
+    console.log(!state)
+    console.log(state === { })
+
+    if (!state) {
+        return
+    }
+    state?.buildings?.forEach(building => placeBuilding(game, building, building.position))
+    state?.items?.forEach(entity => spawnEntity(entity))
+    setWealth(state.wealth || 10000)
     console.log(game.cells)
 }

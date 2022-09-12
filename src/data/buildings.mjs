@@ -1,5 +1,4 @@
 import {EAST, NORTH, SOUTH, WEST} from "./directions.mjs";
-import {mergerTemplate} from "../buildings/merger.js";
 import {beltTemplate} from "../buildings/belt.mjs";
 import {filterTemplate} from "../buildings/filter.mjs";
 import {loadImage, objectUrlFromTemplate} from "../modules/loader.mjs";
@@ -23,7 +22,6 @@ const buildingTemplate = `
 </svg>
 `
 
-const mergerDescription = "Puts items from multiple incoming belts onto a single belt."
 const filterDescription = "Filters out "
 
 export const BUILDING_ID = Object.seal(
@@ -40,15 +38,11 @@ export const BUILDING_ID = Object.seal(
         CASKETINATOR: 9,
         INCINERATOR: 10,
         DELETE: 11,
-        MERGER_N: 12,
-        MERGER_E: 13,
-        MERGER_S: 14,
-        MERGER_W: 15,
-        FILTER_N: 16,
-        FILTER_E: 17,
-        FILTER_S: 18,
-        FILTER_W: 19,
-        BIOHAZARD: 20
+        FILTER_N: 12,
+        FILTER_E: 13,
+        FILTER_S: 14,
+        FILTER_W: 15,
+        BIOHAZARD: 16
     }
 )
 
@@ -73,7 +67,7 @@ export const buildings = Array.from([
         id: BUILDING_ID.BELT_N,
         name: "North facing belt",
         buildable: true,
-        img: await loadRotatable(beltTemplate,"NORTH"),
+        img: await loadRotatable(beltTemplate, "NORTH"),
         description: "Moves items to the north direction.",
         cost: 10
     },
@@ -81,7 +75,7 @@ export const buildings = Array.from([
         id: BUILDING_ID.BELT_E,
         name: "East facing belt",
         buildable: true,
-        img: await loadRotatable(beltTemplate,"EAST"),
+        img: await loadRotatable(beltTemplate, "EAST"),
         description: "Moves items to the east direction.",
         cost: 10
     },
@@ -89,7 +83,7 @@ export const buildings = Array.from([
         id: BUILDING_ID.BELT_S,
         name: "South facing belt",
         buildable: true,
-        img: await loadRotatable(beltTemplate,"SOUTH"),
+        img: await loadRotatable(beltTemplate, "SOUTH"),
         description: "Moves items to the south direction.",
         cost: 10
     },
@@ -97,7 +91,7 @@ export const buildings = Array.from([
         id: BUILDING_ID.BELT_W,
         name: "West facing belt",
         buildable: true,
-        img: await loadRotatable(beltTemplate,"WEST"),
+        img: await loadRotatable(beltTemplate, "WEST"),
         description: "Moves items to the west direction.",
         cost: 10
     },
@@ -131,43 +125,11 @@ export const buildings = Array.from([
         img: await loadImage("assets/items/cross.svg")
     },
     {
-        id: BUILDING_ID.MERGER_N,
-        name: "North facing merger",
-        description: mergerDescription,
-        buildable: true,
-        img: await loadRotatable(mergerTemplate,"NORTH"),
-        cost: 500
-    },
-    {
-        id: BUILDING_ID.MERGER_E,
-        name: "East facing merger",
-        description: mergerDescription,
-        buildable: true,
-        img: await loadRotatable(mergerTemplate,"EAST"),
-        cost: 500
-    },
-    {
-        id: BUILDING_ID.MERGER_S,
-        name: "South facing merger",
-        description: mergerDescription,
-        buildable: true,
-        img: await loadRotatable(mergerTemplate,"SOUTH"),
-        cost: 500
-    },
-    {
-        id: BUILDING_ID.MERGER_W,
-        name: "West facing merger",
-        description: mergerDescription,
-        buildable: true,
-        img: await loadRotatable(mergerTemplate,"WEST"),
-        cost: 500
-    },
-    {
         id: BUILDING_ID.FILTER_N,
         name: "North facing filter",
         description: filterDescription,
         buildable: true,
-        img: await loadRotatable(filterTemplate,"NORTH"),
+        img: await loadRotatable(filterTemplate, "NORTH"),
         cost: 250
     },
     {
@@ -175,7 +137,7 @@ export const buildings = Array.from([
         name: "East facing filter",
         description: filterDescription,
         buildable: true,
-        img: await loadRotatable(filterTemplate,"EAST"),
+        img: await loadRotatable(filterTemplate, "EAST"),
         cost: 250
     },
     {
@@ -183,7 +145,7 @@ export const buildings = Array.from([
         name: "South facing filter",
         description: filterDescription,
         buildable: true,
-        img: await loadRotatable(filterTemplate,"SOUTH"),
+        img: await loadRotatable(filterTemplate, "SOUTH"),
         cost: 250
     },
     {
@@ -191,7 +153,7 @@ export const buildings = Array.from([
         name: "West facing filter",
         description: filterDescription,
         buildable: true,
-        img: await loadRotatable(filterTemplate,"WEST"),
+        img: await loadRotatable(filterTemplate, "WEST"),
         cost: 250
     },
     {
