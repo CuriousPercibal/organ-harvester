@@ -1,0 +1,29 @@
+<svg width="384" height="192" xmlns="http://www.w3.org/2000/svg">
+    <rect width="354" height="170" fill="beige" stroke="gray" stroke-width="10" x="15" y="32"/>
+    <rect width="384" height="10" fill="grey" x="0" y="32"/>
+    <rect width="84" height="192" fill="beige" stroke="gray" stroke-width="10" x="150" y="5"/>
+    <rect width="105" height="10" fill="grey" x="140" y="5"/>
+    <defs>
+        <g id="w">
+            <rect width="30" height="40" fill="lightblue" stroke-width="3" stroke="gray" x="30" y="64"/>
+        </g>
+    </defs>
+    <use href="#w"/>
+    <use href="#w" transform="translate(40)"/>
+    <use href="#w" transform="translate(80)"/>
+    <use href="#w" transform="translate(0 60)"/>
+    <use href="#w" transform="translate(40 60)"/>
+    <use href="#w" transform="translate(80 60)"/>
+    <use href="#w" transform="translate(214)"/>
+    <use href="#w" transform="translate(254)"/>
+    <use href="#w" transform="translate(294)"/>
+    <use href="#w" transform="translate(214 60)"/>
+    <use href="#w" transform="translate(254 60)"/>
+    <use href="#w" transform="translate(294 60)"/>
+    <circle cx="192" cy="60" r="25" fill="black" stroke-width="4" stroke="gray"/>
+    <line x2="184" x1="184" y1="45" y2="75" stroke="white" stroke-width="8"/>
+    <line x2="200" x1="200" y1="45" y2="75" stroke="white" stroke-width="8"/>
+    <line x2="184" x1="200" y1="60" y2="60" stroke="white" stroke-width="8"/>
+    <rect x="167" y="112" width="50" height="80" fill="#2f1900" stroke="black" stroke-width="2"/>
+    <path d="M187 187L 192 182 L197 187" stroke="#c0f734" fill="none" stroke-width="2"/>
+</svg>

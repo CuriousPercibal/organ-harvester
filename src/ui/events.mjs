@@ -9,7 +9,6 @@ import {
     unselectBuilding
 } from "./build.mjs";
 import {containerDiv, game, setWealth, STD_TILE_WIDTH, wealth} from "../index.js";
-import {BUILDING_ID} from "../data/buildings.mjs";
 import {POOL, spawnEntity} from "../entities/entity.mjs";
 
 export let mouseX
@@ -71,7 +70,7 @@ function calculateCellPosition() {
 }
 
 function save() {
-    const buildings = game.cells.flat().filter(value => value.id !== BUILDING_ID.DEFAULT)
+    const buildings = game.cells.flat().filter(value => value)
     const items = POOL.filter(value => value.active)
     const save = {items, buildings, wealth}
     localStorage.setItem('oh_savedgame', JSON.stringify(save))

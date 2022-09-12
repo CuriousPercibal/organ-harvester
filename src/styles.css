@@ -1,0 +1,155 @@
+:root {
+    --bg: #000411;
+    --blur: 10px;
+    --prop: var(--bg) 0%, rgba(255,255,255,0) 30%;
+}
+
+* {
+    margin: 0;
+    overflow: scroll;
+    background: var(--bg);
+}
+
+#buttons {
+    z-index: 4;
+    background-color: #00000000;
+    position: fixed;
+    right: 0;
+    top: 2em;
+    width: 4em;
+    overflow: hidden;
+}
+
+button {
+    z-index: 4;
+    position: fixed;
+    color: beige;
+    font-weight: bold;
+    font-size: 16pt;
+    padding: 0.2em 0.5em;
+}
+
+.cb {
+    background-color: darkred;
+    margin:  1em 0 0 1em;
+    border-style: none;
+    border-radius: 0.5em;
+}
+
+.ui-b {
+    width: 12em;
+    right: calc(0% - 4.75em);
+    top: 7em;
+    background-color: gray;
+    border-radius: 0 0 16px 16px;
+    transform: rotate(90deg);
+}
+
+#build-container {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+}
+
+#build {
+    background-color: var(--bg);
+    left: 50%;
+    top: 10%;
+    -ms-transform: translate(-50%);
+    transform: translate(-50%);
+    position: absolute;
+    width: 60em;
+    height: 80vh;
+}
+
+#build div:nth-child(even), #build div:nth-child(even) *  {
+    background-color: #020a1f;
+}
+
+#build div:nth-child(even):hover, #build div:nth-child(even):hover *  {
+    background-color: #182652;
+}
+
+.infos {
+    padding: 2%;
+    display: inline-grid;
+    grid-template-columns: 1fr 2fr 3fr;
+    width: 96%;
+    align-items: center;
+}
+
+.infos:hover, .infos:hover * {
+    background-color: #182652;
+}
+
+.infos img {
+    border-width: thick;
+    border-style: double;
+    border-color: #1e3780;
+}
+
+.infos div {
+    display: flex;
+    flex-direction: row;
+}
+
+#background {
+    position: fixed;
+}
+
+#game {
+    position: relative;
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--bg);
+}
+
+.e {
+    z-index: 1;
+    position: absolute;
+    background: var(--bg);
+}
+
+.e1 {
+    width: 20%;
+    height: 100%;
+}
+
+.e2 {
+    width: 100%;
+    height: 20%;
+}
+
+#l {
+    background: linear-gradient(90deg,  var(--prop));
+}
+
+#r {
+    float: right;
+    right: 0;
+    background: linear-gradient(-90deg,  var(--prop));
+}
+
+#t {
+    top: 0;
+    background: linear-gradient(180deg,  var(--prop));
+}
+
+#b {
+    bottom: 0;
+    background: linear-gradient(0deg,  var(--prop));
+}
+
+#scene-container {
+    width: 100%;
+    overflow: scroll;
+}
+
+#scene {
+    position: relative;
+    resize: block;
+}

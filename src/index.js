@@ -27,16 +27,16 @@ export async function init() {
     document.addEventListener("keypress", onkeypress)
     Array.of(
         document.getElementById('scene'),
-        document.getElementById('top'),
-        document.getElementById('left'),
-        document.getElementById('right'),
-        document.getElementById('bottom')
+        document.getElementById('t'),
+        document.getElementById('l'),
+        document.getElementById('r'),
+        document.getElementById('b')
     ).forEach(value => {
         value.addEventListener("mousemove", onmousemove)
         value.onclick = evt => onmouseclick(evt, game)
     })
 
-    drawBackground(window.innerWidth, window.innerHeight)
+    drawBackground(4000, 4000)
     spawnEntityWithId(ITEMS.KIDNEY, {x: 17, y: 0.5})
     spawnEntityWithId(ITEMS.BAD_KIDNEY, {x: 17, y: 2.5})
     spawnEntityWithId(ITEMS.CORPSE, {x: 17, y: 4.5})
@@ -81,7 +81,7 @@ function mainLoop() {
 
 function update() {
     const usage = POOL.filter(value => value.active).length / 10
-    console.log(`Pool usage: ${usage}%`)
+    // console.log(`Pool usage: ${usage}%`)
 
     POOL.filter(item => item.active)
         .filter(isColliding)
@@ -116,7 +116,8 @@ function render() {
     drawBasePattern(game.scene)
     drawGrid(game.scene)
     drawBuildingInCell(game.scene, {x: 3, y: -2.15}, BUILDING_ID.FUNERAL_HOME)
-    drawBuildingInCell(game.scene, {x: 12, y: -3.15}, BUILDING_ID.MORGUE)
+    drawBuildingInCell(game.scene, {x: 10, y: -3.15}, BUILDING_ID.MORGUE)
+    drawBuildingInCell(game.scene, {x: 20.5, y: -3.15}, BUILDING_ID.HOSPITAL)
     game.cells.flat()
         .filter(value => value)
         .forEach(value => drawBuildingInCell(game.scene, value.position, value.id))

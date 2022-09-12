@@ -9,7 +9,6 @@ export function drawBasePattern(context) {
     const height = 10
     const y = 64*3
     let x = 0
-    // linear-gradient(90deg, rgba(0,6,42,0.8477591720281863) 0%, rgba(255,255,255,1) 21%)
     const gradient = context.createLinearGradient(0, 0, 0, y)
     gradient.addColorStop(0, '#000411')
     gradient.addColorStop(1, 'rgba(18,27,40,0.94)')
@@ -25,7 +24,9 @@ export function drawBasePattern(context) {
         context.fillRect(x, y, 4, height)
     }
     context.fillStyle = '#131414'
-    context.fillRect(17*64, y, 64, 12)
+    context.fillRect(15*64, y, 64, 12)
+    context.fillRect(4*64, y, 64, 12)
+    context.fillRect(23*64, y, 64, 12)
 }
 
 export function drawGrid(context) {

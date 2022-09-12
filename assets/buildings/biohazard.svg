@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
-    <defs>
-        <g id="circle_part">
-            <circle cx="0" cy="0" r="12" fill="black"/>
-            <circle cx="0" cy="-2" r="10" fill="#FF7900"/>
-        </g>
-    </defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><defs>
+<g id="circle_part">
+<circle cx="0" cy="0" r="12" fill="black"/>
+<circle cx="0" cy="-2" r="10" fill="#FF7900"/>
+</g>
+</defs>
     <rect width="54" height="54" fill="#FF7900" stroke="#8a4100" stroke-width="4" x="5" y="10"/>
     <line x1="5" y1="10" x2="59" y2="10" stroke-width="4" stroke="black"/>
     <use href="#circle_part" transform="translate(32 28)"/>

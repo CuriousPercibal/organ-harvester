@@ -11,7 +11,7 @@ export const buildUIContainer = document.getElementById('build-container')
 const template = `<span>%img</span>
 <span>
     <h2>%name</h2>
-    <h2>%cost</h2>
+    <h2 style="color:green">%cost</h2>
 </span>
 <span>
     <p>%description</p>
@@ -39,7 +39,7 @@ export function listBuildings() {
 export function placeBuilding(game, building, position) {
     game.cells.flat()
         .filter(value => value?.collider(value, {position: {x: mouseX, y: mouseY}}))
-        .map(value => game.cells[value.position.y][value.position.x] = { id: BUILDING_ID.DEFAULT })
+        .map(value => game.cells[value.position.y][value.position.x] = undefined)
     const [collider, move] = getUtilityFunctions(building)
     building = Object.assign({collider, interact: move, position}, building)
     console.log(position)
@@ -81,7 +81,7 @@ function getUtilityFunctions(building) {
     }
 }
 
-function createInfo(name = 'placeholder', buildingImage, cost = 0, description = 'Lorem ipsum') {
+function createInfo(name = 'placeholder', buildingImage, cost = 0, description = '') {
     const div = document.createElement('div')
     div.className = 'infos'
     div.innerHTML = template.replace('%img', buildingImage.outerHTML)

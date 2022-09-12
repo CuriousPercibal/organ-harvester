@@ -15,4 +15,5 @@
     <rect x="86" y="50" width="20" height="4" fill="#261800"/>
     <rect x="76" y="118" width="40" height="10" fill="#261800"/>
     <rect x="71" y="108" width="50" height="10" fill="#261800"/>
+    <path d="M91 123 L96 118 L101 123" stroke="#c0f734" fill="none" stroke-width="2"/>
 </svg>

@@ -23,6 +23,9 @@ const buildingTemplate = `
 </svg>
 `
 
+const mergerDescription = "Puts items from multiple incoming belts onto a single belt."
+const filterDescription = "Filters out "
+
 export const BUILDING_ID = Object.seal(
     {
         DEFAULT: 0,
@@ -50,133 +53,154 @@ export const BUILDING_ID = Object.seal(
 )
 
 export const buildings = Array.from([
-    {
-        id: BUILDING_ID.DEFAULT,
-        name: "default",
-        img: await loadImage("public/assets/buildings/default.svg")
-    },
+    {},
     {
         id: BUILDING_ID.MORGUE,
         name: "morgue",
-        img: await loadImage("public/assets/buildings/morgue.svg")
+        img: await loadImage("assets/buildings/morgue.svg")
     },
     {
         id: BUILDING_ID.FUNERAL_HOME,
         name: "morgue",
-        img: await loadImage("public/assets/buildings/funeral_home.svg")
+        img: await loadImage("assets/buildings/funeral_home.svg")
     },
     {
         id: BUILDING_ID.HOSPITAL,
         name: "morgue",
-        img: await loadImage("public/assets/buildings/morgue.svg")
+        img: await loadImage("assets/buildings/hospital.svg")
     },
     {
         id: BUILDING_ID.BELT_N,
         name: "North facing belt",
         buildable: true,
         img: await loadRotatable(beltTemplate,"NORTH"),
-        description: "Moves items to the north direction."
+        description: "Moves items to the north direction.",
+        cost: 10
     },
     {
         id: BUILDING_ID.BELT_E,
         name: "East facing belt",
         buildable: true,
         img: await loadRotatable(beltTemplate,"EAST"),
-        description: "Moves items to the east direction."
+        description: "Moves items to the east direction.",
+        cost: 10
     },
     {
         id: BUILDING_ID.BELT_S,
         name: "South facing belt",
         buildable: true,
         img: await loadRotatable(beltTemplate,"SOUTH"),
-        description: "Moves items to the south direction."
+        description: "Moves items to the south direction.",
+        cost: 10
     },
     {
         id: BUILDING_ID.BELT_W,
         name: "West facing belt",
         buildable: true,
         img: await loadRotatable(beltTemplate,"WEST"),
-        description: "Moves items to the west direction."
+        description: "Moves items to the west direction.",
+        cost: 10
     },
     {
         id: BUILDING_ID.COFFINATOR,
         name: "Coffinator",
         buildable: true,
         img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, coffinatorContent.replace('#coffin', coffinSvg).replace('#corpse', corpseSvg)))),
-        description: "Puts a corpse into a coffin."
+        description: "Puts a corpse into a coffin.",
+        cost: 100
     },
     {
         id: BUILDING_ID.CASKETINATOR,
         name: "Casketinator",
         buildable: true,
         img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, casketinatorContent.replace('#corpse', corpseSvg)))),
-        description: "Puts a corpse into a casket."
+        description: "Puts a corpse into a casket.",
+        cost: 100
     },
     {
         id: BUILDING_ID.INCINERATOR,
         name: "Incinerator",
         buildable: true,
         img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, incineratorContent))),
-        description: "Incinerates a corpse and puts its ashes into a urn."
+        description: "Incinerates a corpse and puts its ashes into a urn.",
+        cost: 100
     },
     {
         id: BUILDING_ID.DELETE,
         name: "Delete",
-        img: await loadImage("public/assets/items/cross.svg")
+        img: await loadImage("assets/items/cross.svg")
     },
     {
         id: BUILDING_ID.MERGER_N,
         name: "North facing merger",
+        description: mergerDescription,
         buildable: true,
-        img: await loadRotatable(mergerTemplate,"NORTH")
+        img: await loadRotatable(mergerTemplate,"NORTH"),
+        cost: 500
     },
     {
         id: BUILDING_ID.MERGER_E,
         name: "East facing merger",
+        description: mergerDescription,
         buildable: true,
-        img: await loadRotatable(mergerTemplate,"EAST")
+        img: await loadRotatable(mergerTemplate,"EAST"),
+        cost: 500
     },
     {
         id: BUILDING_ID.MERGER_S,
         name: "South facing merger",
+        description: mergerDescription,
         buildable: true,
-        img: await loadRotatable(mergerTemplate,"SOUTH")
+        img: await loadRotatable(mergerTemplate,"SOUTH"),
+        cost: 500
     },
     {
         id: BUILDING_ID.MERGER_W,
         name: "West facing merger",
+        description: mergerDescription,
         buildable: true,
-        img: await loadRotatable(mergerTemplate,"WEST")
+        img: await loadRotatable(mergerTemplate,"WEST"),
+        cost: 500
     },
     {
         id: BUILDING_ID.FILTER_N,
         name: "North facing filter",
+        description: filterDescription,
         buildable: true,
-        img: await loadRotatable(filterTemplate,"NORTH")
+        img: await loadRotatable(filterTemplate,"NORTH"),
+        cost: 250
     },
     {
         id: BUILDING_ID.FILTER_E,
         name: "East facing filter",
+        description: filterDescription,
         buildable: true,
-        img: await loadRotatable(filterTemplate,"EAST")
+        img: await loadRotatable(filterTemplate,"EAST"),
+        cost: 250
     },
     {
         id: BUILDING_ID.FILTER_S,
         name: "South facing filter",
+        description: filterDescription,
         buildable: true,
-        img: await loadRotatable(filterTemplate,"SOUTH")
+        img: await loadRotatable(filterTemplate,"SOUTH"),
+        cost: 250
     },
     {
         id: BUILDING_ID.FILTER_W,
         name: "West facing filter",
+        description: filterDescription,
         buildable: true,
-        img: await loadRotatable(filterTemplate,"WEST")
+        img: await loadRotatable(filterTemplate,"WEST"),
+        cost: 250
     },
     {
         id: BUILDING_ID.BIOHAZARD,
         name: "Biohazard disposal",
+        description: "Destroys biological hazards.",
         buildable: true,
-        img: await loadImage("public/assets/buildings/biohazard.svg")
+        img: await loadImage("assets/buildings/biohazard.svg"),
+        cost: 1000
     },
 ])
 

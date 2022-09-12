@@ -53,8 +53,7 @@ export function corpseTransformator(id) {
         }
 
         if (entity.id === ITEMS.CORPSE) {
-            entity.originalId = entity.id
-            entity.id = id
+            Object.assign(entity, {originalId: entity.id, id})
         }
 
         setEntityPosition(entity, newPosition)

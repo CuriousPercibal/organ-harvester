@@ -8,7 +8,21 @@ sed -i 's/\\n//g' dist/main.js
 sed -i 's/    //g' dist/main.js
 mkdir game
 cd game || exit
-cp -r ../public/* .
+cp -r ../assets .
+cd assets/buildings || exit
+# shellcheck disable=SC2045
+for file in $(ls); do
+  sed -i 's/    //g' $file
+  sed -i 's/\\n//g' $file
+done
+cd ../..
+cd assets/items || exit
+# shellcheck disable=SC2045
+for file in $(ls); do
+  sed -i 's/    //g' $file
+  sed -i 's/\\n//g' $file
+done
+cd ../..
 cp -r ../dist/* .
 cd ..
 zip -r game ./game

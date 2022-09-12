@@ -33,12 +33,12 @@ export const items = [
     {
         id: ITEMS.CASKET,
         name: "casket",
-        img: await loadImage("public/assets/items/casket.svg")
+        img: await loadImage("assets/items/casket.svg")
     },
     {
         id: ITEMS.URN,
         name: "urn",
-        img: await loadImage("public/assets/items/urn.svg")
+        img: await loadImage("assets/items/urn.svg")
     },
     {
         id: ITEMS.LIVER,
@@ -79,7 +79,7 @@ export const items = [
     {
         id: ITEMS.PATIENT,
         name: "patient",
-        img: await loadImage("public/assets/items/urn.svg")
+        img: await loadImage("assets/items/urn.svg")
     }
 ]
 

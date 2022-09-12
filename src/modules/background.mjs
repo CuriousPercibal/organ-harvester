@@ -10,14 +10,14 @@ export function drawBackground(width, height) {
     const svg = document.getElementById('background')
     for (let i = 0; i < width+height; i++) {
         const rect = document.createElementNS(ns, 'rect')
-        const size = Math.round(Math.random() * 4)
-        const x = Math.round(Math.random() * width)
-        const y = Math.round(Math.random() * height)
+        const size = Math.random() * 4
+        const x = Math.random() * width
+        const y = Math.random() * height
         rect.setAttributeNS(null, 'width', size)
         rect.setAttributeNS(null, 'height', size)
         rect.setAttributeNS(null, 'x', x)
         rect.setAttributeNS(null, 'y', y)
-        rect.setAttributeNS(null, 'fill', starColors[Math.floor(Math.random()*(starColors.length-1))])
+        rect.setAttributeNS(null, 'fill', starColors[i%starColors.length])
         svg.appendChild(rect)
     }
 }

@@ -6,18 +6,18 @@ const BELT_SPEED = 0.05
 export const beltTemplate = `
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
     <defs>
-        <g id="arrow">
+        <g id="a">
             <line x1="54" x2="31" y1="22" y2="0" stroke="#0f0f0f" stroke-width="4"/>
             <line x1="10" x2="33" y1="22" y2="0" stroke="#0f0f0f" stroke-width="4"/>
         </g>
     </defs>
     <g transform="rotate(#deg) translate(#t1 #t2)">
         <rect width="44" height="64" fill="#2f2f2f" x="10" y="0" />
-        <use href="#arrow"/>
-        <use href="#arrow" transform="translate(0 -16)"/>
-        <use href="#arrow" transform="translate(0 16)"/>
-        <use href="#arrow" transform="translate(0 32)"/>
-        <use href="#arrow" transform="translate(0 48)"/>
+        <use href="#a"/>
+        <use href="#a" transform="translate(0 -16)"/>
+        <use href="#a" transform="translate(0 16)"/>
+        <use href="#a" transform="translate(0 32)"/>
+        <use href="#a" transform="translate(0 48)"/>
         <line x1="10" x2="10" y1="0" y2="64" stroke="#3f3f3f" stroke-width="4"/>
         <line x1="54" x2="54" y1="0" y2="64" stroke="#3f3f3f" stroke-width="4"/>
     </g>
