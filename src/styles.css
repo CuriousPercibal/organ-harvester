@@ -55,7 +55,7 @@ button {
     transform: rotate(90deg);
 }
 
-#build-container {
+#build-container, #info-container {
     z-index: 2;
     width: 100%;
     height: 100%;
@@ -64,7 +64,7 @@ button {
     top: 0;
 }
 
-#build {
+#build, #info {
     background-color: var(--bg);
     left: 50%;
     top: 10%;
@@ -74,6 +74,46 @@ button {
     width: 60em;
     height: 80vh;
 }
+
+#info {
+    display: inline-grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    height: fit-content;
+}
+
+#info span {
+    display: flex;
+    flex-direction: column;
+}
+
+#info:first-child {
+    align-items: center;
+}
+
+#info div {
+    font-size: 24pt;
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+#info img {
+    margin-top: 1em;
+    margin-left: 1em;
+    width: 8em;
+    display: block;
+    border-width: thick;
+    border-style: double;
+    border-color: #1e3780;
+    background-color: darkgrey;
+}
+
+#info div img {
+    margin: 0;
+    border-style: none;
+    width: 3em;
+    background: none;
+}
+
 
 #build div:nth-child(even), #build div:nth-child(even) *  {
     background-color: #020a1f;

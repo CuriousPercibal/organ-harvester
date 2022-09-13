@@ -1,8 +1,7 @@
 import {drawBasePattern, drawBuildingInCell, drawGrid, drawItemInCell} from "./modules/base.mjs";
-import {POOL, spawnCorpse, spawnEntityWithId} from "./entities/entity.mjs";
+import {POOL, spawnCorpse} from "./entities/entity.mjs";
 import {BUILDING_ID, buildings} from "./data/buildings.mjs";
 import {bulldozer, listBuildings, selectedBuilding} from "./ui/build.mjs";
-import {ITEMS} from "./data/items.mjs";
 import {load, mouseX, mouseY, onkeypress, onmouseclick, onmousemove} from "./ui/events.mjs";
 import {drawBackground} from "./modules/background.mjs";
 

@@ -9,7 +9,8 @@ import {
     unselectBuilding
 } from "./build.mjs";
 import {containerDiv, game, setWealth, STD_TILE_WIDTH, wealth} from "../index.js";
-import {POOL, spawnEntity} from "../entities/entity.mjs";
+import {getCollidingEntityAtPosition, POOL, spawnEntity} from "../entities/entity.mjs";
+import {createInfo} from "./info.mjs";
 
 export let mouseX
 export let mouseY
@@ -22,25 +23,29 @@ const events = {
 }
 
 export function onmousemove(event) {
-    console.log({left: containerDiv.offsetLeft, top: containerDiv.offsetTop})
     mouseX = event.pageX - containerDiv.offsetLeft
     mouseY = event.pageY - containerDiv.offsetTop
-    console.log({mouseX, mouseY});
 }
 
 export function onmouseclick(event, game) {
     if (selectedBuilding) {
-        console.log(calculateCellPosition())
         placeBuilding(game, selectedBuilding, calculateCellPosition());
+        return
     }
 
     if (bulldozer) {
         remove(game, calculateCellPosition())
+        return;
+    }
+
+    const collided = getCollidingEntityAtPosition({x: (mouseX / STD_TILE_WIDTH)-0.5, y: (mouseY / STD_TILE_WIDTH) -3})
+    if (collided) {
+        console.log("OPEN")
+        createInfo(collided)
     }
 }
 
 export function onkeypress(event) {
-    console.log(event.key);
     const func = events[event.key] || (() => {})
     func()
 }

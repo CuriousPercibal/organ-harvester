@@ -23,6 +23,12 @@ const buildingTemplate = `
 `
 
 const filterDescription = "Filters out "
+const filters = {
+    bad_organ: false,
+    urn: false,
+    casket: false,
+    coffin: false,
+}
 
 export const BUILDING_ID = Object.seal(
     {
@@ -130,7 +136,8 @@ export const buildings = Array.from([
         description: filterDescription,
         buildable: true,
         img: await loadRotatable(filterTemplate, "NORTH"),
-        cost: 250
+        cost: 250,
+        filters
     },
     {
         id: BUILDING_ID.FILTER_E,
@@ -138,7 +145,8 @@ export const buildings = Array.from([
         description: filterDescription,
         buildable: true,
         img: await loadRotatable(filterTemplate, "EAST"),
-        cost: 250
+        cost: 250,
+        filters
     },
     {
         id: BUILDING_ID.FILTER_S,
@@ -146,7 +154,8 @@ export const buildings = Array.from([
         description: filterDescription,
         buildable: true,
         img: await loadRotatable(filterTemplate, "SOUTH"),
-        cost: 250
+        cost: 250,
+        filters
     },
     {
         id: BUILDING_ID.FILTER_W,
@@ -154,7 +163,8 @@ export const buildings = Array.from([
         description: filterDescription,
         buildable: true,
         img: await loadRotatable(filterTemplate, "WEST"),
-        cost: 250
+        cost: 250,
+        filters
     },
     {
         id: BUILDING_ID.BIOHAZARD,

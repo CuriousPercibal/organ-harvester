@@ -2,6 +2,9 @@ import {ITEMS} from "../data/items.mjs";
 
 export const POOL_SIZE = 1000
 export const POOL = initPool()
+export const COFFIN = 0
+export const CASKET = 1
+export const URN = 2
 
 function initPool() {
     const pool = Array(POOL_SIZE)
@@ -30,8 +33,13 @@ export function spawnEntityWithId(entityId, spawnPosition) {
         id: entityId,
         position: spawnPosition,
         name: `Patient #${Math.floor(Math.random() * 100000)}`,
-        value
+        value,
+        heart: Math.random() > 0.6,
+        kidney: Math.random() > 0.2,
+        liver: Math.random() > 0.7,
+        method: [COFFIN, CASKET, URN][Math.floor(Math.random()*3)]
     })
+    console.log(firstInactive)
 }
 
 export function spawnEntity(entity) {
@@ -68,6 +76,11 @@ export function isCollidingWithAnyEntityAtPosition(entity, position) {
     return POOL.filter(value => value.index !== entity.index)
         .filter(value => value.active)
         .some(value => isCollidingTwoEntity({position}, value))
+}
+
+export function getCollidingEntityAtPosition(position) {
+    return POOL.filter(value => value.active)
+        .find(() => isCollidingWithAnyEntityAtPosition({index: -1}, position))
 }
 
 export function isCollidingTwoEntity(entity, otherEntity) {
