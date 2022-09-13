@@ -2,6 +2,8 @@ import {ITEMS, items} from "../data/items.mjs";
 import {CASKET, URN} from "../entities/entity.mjs";
 
 const infoContainer = document.getElementById('info-container')
+const closeButton = document.getElementById('close-info-ui')
+closeButton.onclick = () => {setInfoVisible(false)}
 
 const infoTemplate = `<span id="img"></span>
 <span>

@@ -75,11 +75,6 @@ export const items = [
         name: "rotten kidney",
         decomposable: true,
         img: await loadImage(objectUrlFromTemplate(fillTemplate(kidneyTemplate, rottenKidneyPalette)))
-    },
-    {
-        id: ITEMS.PATIENT,
-        name: "patient",
-        img: await loadImage("assets/items/urn.svg")
     }
 ]
 

@@ -1,4 +1,4 @@
-import {isCollidingWithAnyEntityAtPosition} from "../entities/entity.mjs";
+import {CASKET, COFFIN, isCollidingWithAnyEntityAtPosition, URN} from "../entities/entity.mjs";
 import {BUILDING_ID} from "../data/buildings.mjs";
 import {EAST, NORTH, SOUTH, WEST} from "../data/directions.mjs";
 
@@ -8,8 +8,6 @@ export const filterTemplate = `
         <rect width="64" height="64" fill="#2f2f2f" x="0" y="0" stroke="#5f5f5f" stroke-width="4"/>
         <line x1="33" x2="20" y1="15" y2="5" stroke-width="2" stroke="#c0f734"/>
         <line x1="32" x2="45" y1="15" y2="5" stroke-width="2" stroke="#c0f734"/>
-        <line x1="54" x2="59" y1="28" y2="33" stroke-width="2" stroke="#cc2f2f"/>
-        <line x1="54" x2="59" y1="37" y2="32" stroke-width="2" stroke="#cc2f2f"/>
         <line x1="33" x2="28" y1="59" y2="54" stroke-width="2" stroke="#c0f734"/>
         <line x1="32" x2="37" y1="59" y2="54" stroke-width="2" stroke="#c0f734"/>
         <line x1="10" x2="5" y1="28" y2="33" stroke-width="2" stroke="#cc2f2f"/>
@@ -19,24 +17,37 @@ export const filterTemplate = `
 </svg>
 `
 
-export function merge() {
-    let inputSelector = 0;
+export const filters = {
+    bad_organ: false,
+    urn: false,
+    casket: false,
+    coffin: false,
+}
+
+export function filter(filters) {
+    let filter = Object.assign({}, filters);
     return function (building, entity) {
-        console.log(inputSelector)
-        const table = getTable(building.id)
-        const output = table.pop()
-        const input = table[inputSelector]
+        const [input, filter_out, other_out] = getTable(building.id)
 
         if (Math.sign(entity.x * input.x) > 0 || Math.sign(entity.y*input.y) > 0 ) {
-            inputSelector = (++inputSelector) % 3;
             return
         }
 
-        const newPos = {
-            x: building.position.x + 1.5 * output.x,
-            y: building.position.y + 1.5 * output.y,
+        let newPos;
+        if ( (filter.bad_organ && (entity.liver || entity.kidney || entity.heart)) ||
+            (filter.urn && entity.method === URN) ||
+            (filter.casket && entity.method === CASKET) ||
+            (filter.coffin && entity.method === COFFIN)) {
+            newPos = {
+                x: building.position.x + 1.5 * filter_out.x,
+                y: building.position.y + 1.5 * filter_out.y,
+            }
+        } else {
+            newPos = {
+                x: building.position.x + 1.5 * other_out.x,
+                y: building.position.y + 1.5 * other_out.y,
+            }
         }
-        console.log(output)
 
         if (isCollidingWithAnyEntityAtPosition(entity, newPos)) {
             console.log("Output is stuck!")
@@ -44,15 +55,14 @@ export function merge() {
         }
 
         entity.position = newPos
-        inputSelector = (++inputSelector) % 3;
     }
 }
 
 function getTable(id) {
     switch (id) {
-        case BUILDING_ID.FILTER_E: return [NORTH, WEST, SOUTH, EAST]
-        case BUILDING_ID.FILTER_S: return [EAST, NORTH, WEST, SOUTH]
-        case BUILDING_ID.FILTER_W: return [SOUTH, EAST, NORTH, WEST]
-        default: return [WEST, SOUTH, EAST, NORTH]
+        case BUILDING_ID.FILTER_E: return [NORTH, WEST, EAST]
+        case BUILDING_ID.FILTER_S: return [EAST, NORTH, SOUTH]
+        case BUILDING_ID.FILTER_W: return [SOUTH, EAST, WEST]
+        default: return [WEST, SOUTH, NORTH]
     }
 }

@@ -11,6 +11,8 @@ import {
 import {containerDiv, game, setWealth, STD_TILE_WIDTH, wealth} from "../index.js";
 import {getCollidingEntityAtPosition, POOL, spawnEntity} from "../entities/entity.mjs";
 import {createInfo} from "./info.mjs";
+import {BUILDING_ID} from "../data/buildings.mjs";
+import {onSaveButtonClick, openFilterSettings, saveButton, setFilterSettingsVisible} from "./filter_setting.mjs";
 
 export let mouseX
 export let mouseY
@@ -42,6 +44,14 @@ export function onmouseclick(event, game) {
     if (collided) {
         console.log("OPEN")
         createInfo(collided)
+    }
+
+    const position = calculateCellPosition()
+    const building = game.cells[position.y][position.x]
+    if (building && building?.filters) {
+        console.log("Filter clicked")
+        openFilterSettings(building.filters)
+        saveButton.onclick = () => {onSaveButtonClick(building)}
     }
 }
 

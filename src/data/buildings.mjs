@@ -1,12 +1,13 @@
 import {EAST, NORTH, SOUTH, WEST} from "./directions.mjs";
 import {beltTemplate} from "../buildings/belt.mjs";
-import {filterTemplate} from "../buildings/filter.mjs";
+import {filters, filterTemplate} from "../buildings/filter.mjs";
 import {loadImage, objectUrlFromTemplate} from "../modules/loader.mjs";
 import {coffinatorContent} from "../buildings/coffinator.mjs";
 import {casketinatorContent} from "../buildings/casketinator.mjs";
 import {incineratorContent} from "../buildings/incinerator.mjs";
 import {coffinSvg} from "../entities/coffin.mjs";
 import {corpseSvg} from "../entities/corpse.mjs";
+import {extractorTemplate} from "../buildings/extractor.mjs";
 
 const buildingTemplate = `
 <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
@@ -23,12 +24,7 @@ const buildingTemplate = `
 `
 
 const filterDescription = "Filters out "
-const filters = {
-    bad_organ: false,
-    urn: false,
-    casket: false,
-    coffin: false,
-}
+
 
 export const BUILDING_ID = Object.seal(
     {
@@ -48,7 +44,8 @@ export const BUILDING_ID = Object.seal(
         FILTER_E: 13,
         FILTER_S: 14,
         FILTER_W: 15,
-        BIOHAZARD: 16
+        EXTRACTOR: 16,
+        BIOHAZARD: 17,
     }
 )
 
@@ -165,6 +162,14 @@ export const buildings = Array.from([
         img: await loadRotatable(filterTemplate, "WEST"),
         cost: 250,
         filters
+    },
+    {
+        id: BUILDING_ID.EXTRACTOR,
+        name: "Extractor",
+        buildable: true,
+        img: await loadImage(objectUrlFromTemplate(fillBuildingTemplate(buildingTemplate, extractorTemplate))),
+        description: "Extracts organs from bodies. Puts organs on the red side.",
+        cost: 500
     },
     {
         id: BUILDING_ID.BIOHAZARD,
